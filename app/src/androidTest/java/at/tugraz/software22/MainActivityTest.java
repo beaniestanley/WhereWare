@@ -13,16 +13,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import at.tugraz.software22.data.DummyOrderRepository;
 import at.tugraz.software22.data.OrderRepository;
 import at.tugraz.software22.domain.OrderService;
 import at.tugraz.software22.ui.MainActivity;
-import at.tugraz.software22.ui.OrderActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
