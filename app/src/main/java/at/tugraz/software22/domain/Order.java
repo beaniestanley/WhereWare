@@ -8,7 +8,7 @@ public class Order {
     List<Product> allOrders_ = new ArrayList<>();
     Integer productQuantity_ = 0;
     Integer estimatedTime_ = 0;
-    LocalDateTime startTime = LocalDateTime.now();
+    LocalDateTime startTime;
     LocalDateTime endTime;
     String status = "started";
 
@@ -33,8 +33,20 @@ public class Order {
         return estimatedTime_;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 
