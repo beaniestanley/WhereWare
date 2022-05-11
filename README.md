@@ -16,13 +16,13 @@ With this application, the order collection will be optimized, and the time for 
 | ------------------- | -------------- |
 | Yunus Emre Akca     | Product owner  |
 | Frederick Knauder   | Scrum master   |
+| Sebastian Gollob    | Technical Lead |
 | Yuma Buchrieser     | Developer      |
 | Wei Yi Stanley Ho   | Developer      |
 | Dominik König       | Developer      |
 | Martin Rabensteiner | Developer      |
 | Hannes Großauer     | Developer      |
 | Rafael Forsthofer   | Developer      |
-| Sebastian Gollob    | Developer      |
 | Ricardo Baljak      | Developer      |
 
 
