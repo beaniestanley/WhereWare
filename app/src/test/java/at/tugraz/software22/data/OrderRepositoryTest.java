@@ -1,10 +1,7 @@
 package at.tugraz.software22.data;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,9 +16,9 @@ public class OrderRepositoryTest{
     @Test
     public void  givenEmptyRepository_whenGetAll_thenReturnFourDummyOrders(){
 
-        OrderRepository orderRepository = new OrderRepository();
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
 
-        List<Order> ordersActual = orderRepository.getOrders();
+        List<Order> ordersActual = dummyOrderRepository.getAll();
 
         int expectedSize = 3;
         Assert.assertEquals(expectedSize, ordersActual.size());
@@ -29,25 +26,25 @@ public class OrderRepositoryTest{
     }
     @Test
     public void  givenEmptyRepository_whenGet_getProductQuantity() {
-        OrderRepository orderRepository = new OrderRepository();
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
 
-        List<Order> ordersActual = orderRepository.getOrders();
+        List<Order> ordersActual = dummyOrderRepository.getAll();
 
-        Product firstProduct = new Product(200, 1, "Xbox One", "Aisle 1");
-        Product secondProduct = new Product(100, 2, "Xbox Controller", "Aisle 2");
-        Product thirdProduct = new Product(50, 1, "Xbox HDMI Adapter", "Aisle 3");
-        Product fourthProduct = new Product(250, 1, "Nintendo Switch", "Aisle 1");
-        Product fithProduct = new Product(350, 2, "PS4 PRO", "Aisle 2");
-        Product sixthProduct = new Product(150, 1, "PS5 SLIM", "Aisle 1");
+        Product firstProduct = new Product(200, 1, "Xbox One", "Aisle 1",1);
+        Product secondProduct = new Product(100, 2, "Xbox Controller", "Aisle 2",2);
+        Product thirdProduct = new Product(50, 1, "Xbox HDMI Adapter", "Aisle 3",3);
+        Product fourthProduct = new Product(250, 1, "Nintendo Switch", "Aisle 1",4);
+        Product fithProduct = new Product(350, 2, "PS4 PRO", "Aisle 2",5);
+        Product sixthProduct = new Product(150, 1, "PS5 SLIM", "Aisle 1",6);
 
         List<Product> productsOrderOne = new ArrayList<>(Arrays.asList(firstProduct, secondProduct, thirdProduct));
         List<Product> productsOrderTwo = new ArrayList<>(Arrays.asList(fithProduct, firstProduct, sixthProduct));
         List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fithProduct, fourthProduct, sixthProduct));
 
 
-        Order expectedFirstOrder = new Order(4, 350, productsOrderOne);
-        Order expectedSecondOrder = new Order(4,700, productsOrderTwo);
-        Order expectedThirdOrder = new Order(4,750, productsOrderThree);
+        Order expectedFirstOrder = new Order(4, 350, productsOrderOne, 1);
+        Order expectedSecondOrder = new Order(4,700, productsOrderTwo, 2);
+        Order expectedThirdOrder = new Order(4,750, productsOrderThree, 3);
 
         Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(0).getProductQuantity_());
         Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(0).getEstimatedTime_());
