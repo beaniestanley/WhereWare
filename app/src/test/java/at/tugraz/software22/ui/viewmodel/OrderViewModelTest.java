@@ -7,14 +7,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -49,7 +46,7 @@ public class OrderViewModelTest {
 
         orderViewModel = new OrderViewModel(applicationMock);
 
-        orderViewModel.getOrderLiveData().observeForever(orderLiveDataObserver);
+        orderViewModel.getOpenOrders().observeForever(orderLiveDataObserver);
     }
 
     @Test
@@ -64,9 +61,9 @@ public class OrderViewModelTest {
 
     @Test
     public void givenOrderServiceWithOneOrder_whenLoadData_thenVerifyOrderLiveDataChanged() {
-        List<Order> expectedOrder = new ArrayList<Order>();
+        List<Order> expectedOrder = new ArrayList<>();
         expectedOrder.add(new Order(1, 1,
-                Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
+                Collections.singletonList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
 
         Mockito.when(applicationMock.getOrderService().getAll()).thenReturn(expectedOrder);
 

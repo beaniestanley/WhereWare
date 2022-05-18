@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderTest{
@@ -30,7 +30,7 @@ public class OrderTest{
         Integer expectedTime = 0;
         Integer expectedID = 1;
         Statuses expectedStatus = Statuses.PENDING;
-        List<Product> expectedOrders = new ArrayList<Product>(Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", expectedID)));
+        List<Product> expectedOrders = new ArrayList<>(Collections.singletonList(new Product(1, 1, "Xbox One", "Aisle 3", expectedID)));
 
         Order firstOrder = new Order(expectedQuantity, expectedTime, expectedOrders, 1);
 

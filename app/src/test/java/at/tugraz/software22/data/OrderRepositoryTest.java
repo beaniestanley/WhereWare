@@ -20,7 +20,7 @@ public class OrderRepositoryTest{
 
         List<Order> ordersActual = dummyOrderRepository.getAll();
 
-        int expectedSize = 3;
+        int expectedSize = 4;
         Assert.assertEquals(expectedSize, ordersActual.size());
 
     }
@@ -42,14 +42,14 @@ public class OrderRepositoryTest{
         List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fithProduct, fourthProduct, sixthProduct));
 
 
-        Order expectedFirstOrder = new Order(4, 350, productsOrderOne, 1);
+        Order expectedFirstOrder = new Order(4, 750, productsOrderOne, 1);
         Order expectedSecondOrder = new Order(4,700, productsOrderTwo, 2);
         Order expectedThirdOrder = new Order(4,750, productsOrderThree, 3);
 
-        Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(0).getProductQuantity_());
-        Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(0).getEstimatedTime_());
-        Assert.assertEquals(expectedFirstOrder.getStatus(), ordersActual.get(0).getStatus());
-        Assert.assertEquals(expectedFirstOrder.getAllOrders_().size(), ordersActual.get(0).getAllOrders_().size());
+        Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(3).getProductQuantity_());
+        Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(3).getEstimatedTime_());
+        Assert.assertEquals(expectedFirstOrder.getStatus(), ordersActual.get(3).getStatus());
+        Assert.assertEquals(expectedFirstOrder.getAllOrders_().size(), ordersActual.get(3).getAllOrders_().size());
 
         Assert.assertEquals(expectedSecondOrder.getProductQuantity_(), ordersActual.get(1).getProductQuantity_());
         Assert.assertEquals(expectedSecondOrder.getEstimatedTime_(), ordersActual.get(1).getEstimatedTime_());

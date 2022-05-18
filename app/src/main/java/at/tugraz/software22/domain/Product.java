@@ -2,9 +2,9 @@ package at.tugraz.software22.domain;
 
 public class Product {
 
-    private  Integer id_ = 0;
-    Integer estimatedTime_ = 0;
-    Integer productQuantity_ = 0;
+    private final Integer id_;
+    Integer estimatedTime_;
+    Integer productQuantity_;
     String name_;
     Statuses status_;
     String location_;
@@ -42,7 +42,4 @@ public class Product {
         return id_;
     }
 
-    public void setStatus(Statuses status) {
-        this.status_ = status;
-    }
 }

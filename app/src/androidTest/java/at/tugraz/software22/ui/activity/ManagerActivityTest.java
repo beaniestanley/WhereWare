@@ -1,7 +1,6 @@
 package at.tugraz.software22.ui.activity;
 
 
-import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
@@ -11,9 +10,7 @@ import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,21 +23,14 @@ import at.tugraz.software22.service.OrderService;
 
 @RunWith(AndroidJUnit4.class)
 public class ManagerActivityTest {
-    private static OrderService orderServiceMock;
-    private Resources resources;
 
     @BeforeClass
     public static void beforeClass() {
-        orderServiceMock = Mockito.mock(OrderService.class);
+        OrderService orderServiceMock = Mockito.mock(OrderService.class);
         WhereWareApplication.setSprintService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
-    }
-
-    @Before
-    public void setUp() {
-        resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
     }
 
     @Test

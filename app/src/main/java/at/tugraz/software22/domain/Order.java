@@ -4,14 +4,13 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Order {
-    private Integer id_;
+    private final Integer id_;
     List<Product> allOrders_ = new ArrayList<>();
     Integer productQuantity_ = 0;
     Integer estimatedTime_ = 0;
-    LocalDateTime startTime = LocalDateTime.now();
+    LocalDateTime startTime;
     LocalDateTime endTime;
     Statuses status = Statuses.PENDING;
 
@@ -50,16 +49,8 @@ public class Order {
         this.status = status;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
     }
 
     public void setEndTime(LocalDateTime endTime) {
@@ -68,5 +59,15 @@ public class Order {
 
     public Duration getCollectionTime() {
         return Duration.between(startTime, endTime);
+    }
+
+    public void startOrder() {
+        this.status = Statuses.STARTED;
+        this.startTime = LocalDateTime.now();
+    }
+
+    public void finishOrder() {
+        this.status = Statuses.FINISHED;
+        this.endTime = LocalDateTime.now();
     }
 }

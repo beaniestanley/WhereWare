@@ -7,18 +7,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Or;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.OrderRepository;
 import at.tugraz.software22.domain.Product;
-import at.tugraz.software22.domain.Statuses;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest {
@@ -43,7 +39,7 @@ public class OrderServiceTest {
 
     @Test
     public void givenRepositoryWithOneOrder_whenGetAll_thenReturnOneOrder() {
-        List<Order> expectedOrders = Arrays.asList(new Order(1, 1, Collections.emptyList(), 1));
+        List<Order> expectedOrders = Collections.singletonList(new Order(1, 1, Collections.emptyList(), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
 
         List<Order> actualOrders = orderService.getAll();
@@ -57,8 +53,8 @@ public class OrderServiceTest {
         Integer expectedTime = 1;
         String expectedName = "Xbox One";
         String expectedLocation = "Aisle 3";
-        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity, expectedTime,
-                Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1));
+        List<Order> expectedOrders = Collections.singletonList(new Order(expectedQuantity, expectedTime,
+                Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
 
         List<Order> actualOrders = orderService.getAll();

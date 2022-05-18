@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -69,9 +70,9 @@ public class MainActivityTest{
         String expectedName = "Xbox One";
         String expectedLocation = "Aisle 3";
         List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity, expectedTime,
-                Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1),
+                        Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1),
                 new Order(2, 2,
-                        Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
+                        Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
         ActivityScenario.launch(MainActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder1))

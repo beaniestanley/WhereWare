@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,18 +16,16 @@ import at.tugraz.software22.ui.viewmodel.OrderViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private OrderViewModel orderViewModel;
     private ArrayAdapter<Order> adapter;
-    private View mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+        OrderViewModel orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
         setupListView();
-        orderViewModel.getOrderLiveData().observe(this, orders -> {
+        orderViewModel.getOpenOrders().observe(this, orders -> {
             TextView createdSprint = findViewById(R.id.amountOfOrders);
             createdSprint.setText(getString(R.string.unclosed_orders, orders.size()));
             adapter.clear();
