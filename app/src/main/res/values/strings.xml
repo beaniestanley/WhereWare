@@ -12,4 +12,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="invalid_login">Invalid Login. You are not wanted here!</string>
+    <string name="user_name_text">Name : %1$s %2$s</string>
+    <string name="text_collection_time">Collection Time: PlaceHolder</string>
 </resources>
