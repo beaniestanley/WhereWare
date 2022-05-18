@@ -7,10 +7,21 @@
 
     <ListView
         android:id="@+id/allUsers"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="405dp"
+        android:layout_height="680dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+
+    </ListView>
+
+    <ImageView
+        android:id="@+id/add_user_button"
+        android:layout_width="49dp"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

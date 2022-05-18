@@ -9,7 +9,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -18,13 +18,15 @@ public class UserService {
         return userRepository.getAll();
     }
 
-    public void addUser(User user){
-        userRepository.addUser(user);
+    public void addUser(String firstName, String lastName) {
+        userRepository.addUser(firstName, lastName);
     }
-    public void removeUser(Integer id){
+
+    public void removeUser(Integer id) {
         userRepository.deleteUser(id);
     }
-    public void updateUser(Integer id, User user){
-        userRepository.updateUser(id, user);
+
+    public void updateUser(Integer id, String firstName, String lastName) {
+        userRepository.updateUser(id, firstName, lastName);
     }
 }
