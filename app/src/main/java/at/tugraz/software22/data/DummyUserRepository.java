@@ -20,12 +20,22 @@ public class DummyUserRepository implements UserRepository {
 
     @Override
     public void deleteUser(Integer id) {
-        users.remove(id - 1);
+        for (User user: users){
+            if (user.getId() == id){
+                users.remove(user);
+                break;
+            }
+        }
     }
 
     @Override
     public void updateUser(Integer id, User updatedUser) {
-        users.set(id - 1, updatedUser);
+        for(int i = 0; i < users.size(); i++){
+            if (users.get(i).getId() == id){
+                users.set(i, updatedUser);
+                break;
+            }
+        }
     }
     @Override
     public List<User> getAll() {
