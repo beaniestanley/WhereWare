@@ -1,21 +1,20 @@
 package at.tugraz.software22.domain;
 
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     Integer id_;
-    String forName;
-    String lastName;
+    String forename;
+    String lastname;
     Integer avgCollectionTime;
     List<Order> completedOrders;
 
 
     public User(Integer id_, String forName, String lastName) {
         this.id_ = id_;
-        this.forName = forName;
-        this.lastName = lastName;
+        this.forename = forName;
+        this.lastname = lastName;
         this.avgCollectionTime = 0;
         this.completedOrders = new ArrayList<>();
     }
@@ -24,12 +23,12 @@ public class User {
         return id_;
     }
 
-    public String getForName() {
-        return forName;
+    public String getForename() {
+        return forename;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
     public List<Order> getCompletedOrders() {

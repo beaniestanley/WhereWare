@@ -8,13 +8,13 @@ public class UserTest {
     @Test
     public void givenNewUser_whenConstructor_thenReturnNewUser(){
         Integer expectedId = 1;
-        String expectedForName = "Stefan";
-        String expectedLastName = "Maier";
+        String expectedForename = "Stefan";
+        String expectedLastname = "Maier";
 
-        User user = new User(expectedId, expectedForName, expectedLastName);
+        User user = new User(expectedId, expectedForename, expectedLastname);
 
         Assert.assertEquals(expectedId, user.getId());
-        Assert.assertEquals(expectedForName, user.getForName());
-        Assert.assertEquals(expectedLastName, user.getLastName());
+        Assert.assertEquals(expectedForename, user.getForename());
+        Assert.assertEquals(expectedLastname, user.getLastname());
     }
 }
