@@ -1,10 +1,13 @@
 package at.tugraz.software22.service;
 
 
+import net.bytebuddy.asm.Advice;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,11 +29,6 @@ public class UserServiceTest{
     public void setUp() {
         userService = new UserService(userRepositoryMock);
     }
-    Integer expectedId = 1;
-    String expectedForename = "Stefan";
-    String expectedLastname = "Maier";
-
-    User user = new User(expectedId, expectedForename, expectedLastname);
 
     @Test
     public void givenEmptyRepository_whenGetAll_thenReturnNoOrders() {
@@ -44,26 +42,25 @@ public class UserServiceTest{
     @Test
     public void givenUser_whenAddUser_thenVerifyAddGetsCalled() {
         User expectedUser = new User(1, "Stefan", "Humbold");
-        userService.addUser(expectedUser);
-
-        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser(expectedUser);
+        userService.addUser("Stefan", "Humbold");
+        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser("Stefan", "Humbold");
     }
     @Test
-    public void givenUser_whenRemoveUser_thenVerifyRemoveetsCalled() {
+    public void givenUser_whenRemoveUser_thenVerifyRemoveGetsCalled() {
         User expectedUser = new User(1, "Stefan", "Humbold");
-        userService.addUser(expectedUser);
-        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser(expectedUser);
+        userService.addUser("Stefan", "Humbold");
+        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser("Stefan", "Humbold");
         userService.removeUser(1);
         Mockito.verify(userRepositoryMock, Mockito.times(1)).deleteUser(1);
     }
     @Test
-    public void givenUser_whenUpdateUser_thenVerifyRemoveetsCalled() {
+    public void givenUser_whenUpdateUser_thenVerifyRemoveGetsCalled() {
         User expectedUser = new User(1, "Stefan", "Humbold");
-        User expectedUpdatedUser = new User(1, "Stefan", "Humbold");
-        userService.addUser(expectedUser);
-        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser(expectedUser);
-        userService.updateUser(1, expectedUpdatedUser);
-        Mockito.verify(userRepositoryMock, Mockito.times(1)).updateUser(1, expectedUpdatedUser);
+        User expectedUpdatedUser = new User(1, "Stefanie", "Humbold");
+        userService.addUser("Stefan", "Humbold");
+        Mockito.verify(userRepositoryMock, Mockito.times(1)).addUser("Stefan", "Humbold");
+        userService.updateUser(1, "Stefanie", "Humbold");
+       Mockito.verify(userRepositoryMock, Mockito.times(1)).updateUser(1,"Stefanie", "Humbold");
     }
 
 }
