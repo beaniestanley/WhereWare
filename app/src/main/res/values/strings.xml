@@ -14,4 +14,9 @@
     <string name="invalid_login">Invalid Login. You are not wanted here!</string>
     <string name="user_name_text">Name : %1$s %2$s</string>
     <string name="text_collection_time">Collection Time: PlaceHolder</string>
+    <string name="create_user_text">Create User</string>
+    <string name="default_lastname">Mustermann</string>
+    <string name="title_lastname">Lastname :</string>
+    <string name="default_firstname">Max</string>
+    <string name="title_firstname">Firstname:</string>
 </resources>

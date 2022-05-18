@@ -6,10 +6,10 @@ public interface UserRepository {
 
     List<User> getAll();
 
-    void addUser(User newUser);
+    void addUser(String firstName, String lastName);
 
     void deleteUser(Integer id);
 
-    void updateUser(Integer id, User updatedUser);
+    void updateUser(Integer id, String firstName, String lastName);
 
 }
