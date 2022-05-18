@@ -69,7 +69,7 @@ public class UserRepositoryTest {
         String expectedUpdatedLastname = "Humbold";
 
         User user = new User(expectedId, expectedForename, expectedLastname);
-        User updatedUser = new User(expectedId, expectedUpdatedForename, expectedLastname);
+        User updatedUser = new User(expectedId, expectedUpdatedForename, expectedUpdatedLastname);
 
         DummyUserRepository dummyUserRepository = new DummyUserRepository();
 
