@@ -85,7 +85,7 @@ public class UserViewModelTest{
         Mockito.when(applicationMock.getUserService().getAll()).thenReturn(expectedUsers);
 
         userViewModel.loadData();
-        userViewModel.updateUser(1, new User(1, "Hannes", "Peter"));
+        userViewModel.updateUser(1,"Hannes", "Peter");
         Mockito.verify(userLiveDataObserver, Mockito.times(2)).onChanged(expectedUsers);
     }
 }

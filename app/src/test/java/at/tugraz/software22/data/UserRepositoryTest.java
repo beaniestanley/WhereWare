@@ -22,16 +22,12 @@ public class UserRepositoryTest {
 
     @Test
     public void givenEmptyRepository_whenAddUser_thenReturnOneUser(){
-
-        Integer expectedId = 1;
         String expectedForename = "Stefan";
         String expectedLastname = "Maier";
 
-        User user = new User(expectedId, expectedForename, expectedLastname);
-
         DummyUserRepository dummyUserRepository = new DummyUserRepository();
 
-        dummyUserRepository.addUser(user);
+        dummyUserRepository.addUser(expectedForename, expectedLastname);
 
         List<User> usersActual = dummyUserRepository.getAll();
 
@@ -45,11 +41,9 @@ public class UserRepositoryTest {
         String expectedForename = "Stefan";
         String expectedLastname = "Maier";
 
-        User user = new User(expectedId, expectedForename, expectedLastname);
-
         DummyUserRepository dummyUserRepository = new DummyUserRepository();
 
-        dummyUserRepository.addUser(user);
+        dummyUserRepository.addUser(expectedForename, expectedLastname);
 
         dummyUserRepository.deleteUser(expectedId);
 
@@ -73,9 +67,9 @@ public class UserRepositoryTest {
 
         DummyUserRepository dummyUserRepository = new DummyUserRepository();
 
-        dummyUserRepository.addUser(user);
+        dummyUserRepository.addUser(expectedForename, expectedLastname);
 
-        dummyUserRepository.updateUser(expectedId, updatedUser);
+        dummyUserRepository.updateUser(expectedId, "Stefanie", "Humbold");
 
         List<User> usersActual = dummyUserRepository.getAll();
 
