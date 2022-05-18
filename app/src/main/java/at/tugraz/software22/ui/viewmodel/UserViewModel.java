@@ -36,9 +36,9 @@ public class UserViewModel extends AndroidViewModel {
         });
     }
 
-    public void createUser(User user) {
+    public void createUser(String firstName, String lastName) {
         executor.execute(() -> {
-            userService.addUser(user);
+            userService.addUser(firstName, lastName);
             List<User> users = userService.getAll();
             this.userLiveData.postValue(users);
         });
@@ -50,9 +50,9 @@ public class UserViewModel extends AndroidViewModel {
             this.userLiveData.postValue(users);
         });
     }
-    public void updateUser(Integer id, User user) {
+    public void updateUser(Integer id, String firstName, String lastName) {
         executor.execute(() -> {
-            userService.updateUser(id, user);
+            userService.updateUser(id, firstName, lastName);
             List<User> users = userService.getAll();
             this.userLiveData.postValue(users);
         });

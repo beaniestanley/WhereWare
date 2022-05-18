@@ -34,4 +34,11 @@ public class User {
     public List<Order> getCompletedOrders() {
         return completedOrders;
     }
+
+    public void setFirstName(String firstName) {
+        this.forename = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastname = lastName;
+    }
 }
