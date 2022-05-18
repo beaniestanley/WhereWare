@@ -9,7 +9,7 @@ import at.tugraz.software22.domain.UserRepository;
 public class DummyUserRepository implements UserRepository {
     private final List<User> users;
 
-    DummyUserRepository(){
+    public DummyUserRepository(){
         users = new ArrayList<>();
     }
 
