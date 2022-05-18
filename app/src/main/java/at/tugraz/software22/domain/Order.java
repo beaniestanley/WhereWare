@@ -5,20 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+    private Integer id_;
     List<Product> allOrders_ = new ArrayList<>();
     Integer productQuantity_ = 0;
     Integer estimatedTime_ = 0;
     LocalDateTime startTime = LocalDateTime.now();
     LocalDateTime endTime;
-    String status = "started";
+    Statuses status = Statuses.PENDING;
 
-    public Order(){}
+    public Order(){
+        id_ = 1;
+    }
 
-    public Order(Integer productQuantity, Integer estimatedTime, List<Product> products){
+    public Order(Integer productQuantity, Integer estimatedTime, List<Product> products, Integer id){
+        id_ = id;
         productQuantity_ = productQuantity;
         estimatedTime_ = estimatedTime;
         allOrders_ = products;
-        status = "started";
     }
 
     public List<Product> getAllOrders_() {
@@ -33,9 +36,15 @@ public class Order {
         return estimatedTime_;
     }
 
-    public String getStatus() {
+    public Statuses getStatus() {
         return status;
     }
 
+    public Integer getId() {
+        return id_;
+    }
 
+    public void setStatus(Statuses status) {
+        this.status = status;
+    }
 }
