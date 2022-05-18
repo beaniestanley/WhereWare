@@ -1,10 +1,16 @@
 package at.tugraz.software22.ui.activity;
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -54,6 +60,23 @@ public class UserActivityTest{
         ActivityScenario.launch(UserActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedString))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+    @Test
+    public void givenActivityResultWithIntent_whenAddUserActivityReturns_thenVerifyThatAddUserMethodOfUserServiceIsCalled(){
+        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), UserActivity.class);
+        intent.putExtra(UserViewActivity.INTENT_RESULT_FIRST_NAME, "Stefan");
+        intent.putExtra(UserViewActivity.INTENT_RESULT_LAST_NAME, "Hauer");
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, intent);
+        Intents.init();
+        Intents.intending(IntentMatchers.hasComponent(UserViewActivity.class.getName())).respondWith(result);
+
+        ActivityScenario.launch(UserActivity.class);
+
+        Espresso.onView(ViewMatchers.withId(R.id.add_user_button))
+                .perform(ViewActions.click());
+
+
+        Mockito.verify(userServiceMock, Mockito.times(1)).addUser("Stefan", "Hauer");
     }
 
 }
