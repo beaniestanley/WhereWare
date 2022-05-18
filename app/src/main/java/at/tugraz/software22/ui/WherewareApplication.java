@@ -61,6 +61,10 @@ public class WherewareApplication extends Application {
     public static void setUserService(UserService testUserService) {
         userService = testUserService;
     }
+    @VisibleForTesting
+    public static void setUserService(UserService testUserService) {
+        userService = testUserService;
+    }
 
     @VisibleForTesting
     public static void setBackgroundExecutor(Executor testBackgroundExecutor) {
