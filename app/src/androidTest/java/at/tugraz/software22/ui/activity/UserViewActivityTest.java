@@ -81,7 +81,8 @@ public class UserViewActivityTest{
         String expectedFirstName = "Stefan";
         String expectedEditedName = "Hannes";
         String expectedLastName = "Schmidt";
-        User expectedUser = new User(1, expectedFirstName, expectedLastName);
+        Integer expectedID = 1;
+        User expectedUser = new User(expectedID, expectedFirstName, expectedLastName);
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), UserViewActivity.class);
         intent.putExtra(UserActivity.INTENT_EXTRA_USER, expectedUser);
         ActivityScenario newActivity = ActivityScenario.launch(intent);
@@ -100,8 +101,10 @@ public class UserViewActivityTest{
         Bundle extras = result.getResultData().getExtras();
         String actualFirstName = extras.getString(UserViewActivity.INTENT_RESULT_FIRST_NAME);
         String actualLastName = extras.getString(UserViewActivity.INTENT_RESULT_LAST_NAME);
+        Integer actualId = extras.getInt(UserViewActivity.INTENT_RESULT_USER_ID);
         Assert.assertEquals(expectedEditedName, actualFirstName);
         Assert.assertEquals(expectedLastName, actualLastName);
+        Assert.assertEquals(expectedID, actualId);
     }
     @Test
     public void givenUser_whenDeleteButtonClicked_thenSetResultAndFinish() {
