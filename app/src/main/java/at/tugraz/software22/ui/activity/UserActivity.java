@@ -3,6 +3,7 @@ package at.tugraz.software22.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,7 +21,9 @@ public class UserActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     private ArrayAdapter<User> adapter;
+    ListView userListView = null;
     private View mainView;
+    public static final String INTENT_EXTRA_USER = "user_object";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,15 @@ public class UserActivity extends AppCompatActivity {
             Intent userIntent = new Intent(UserActivity.this, UserViewActivity.class);
             startActivityForResult(userIntent, 2);
         });
+
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent userIntent = new Intent(UserActivity.this, UserViewActivity.class);
+                userIntent.putExtra(INTENT_EXTRA_USER, userViewModel.getUserLiveData().getValue().get(i));
+                startActivityForResult(userIntent, 3);
+            }
+        });
         userViewModel.getUserLiveData().observe(this, user -> {
             adapter.clear();
             adapter.addAll(user);
@@ -43,9 +55,9 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setupListView() {
-        ListView listView = findViewById(R.id.allUsers);
+        userListView = findViewById(R.id.allUsers);
         adapter = new UserAdapter(this, R.layout.user_list_item);
-        listView.setAdapter(adapter);
+        userListView.setAdapter(adapter);
     }
 
     @Override
