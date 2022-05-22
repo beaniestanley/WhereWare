@@ -63,10 +63,20 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
+        if ((requestCode == 2 || requestCode == 3) && resultCode == RESULT_OK && data != null) {
             String first_name = data.getStringExtra(UserViewActivity.INTENT_RESULT_FIRST_NAME);
             String last_name = data.getStringExtra(UserViewActivity.INTENT_RESULT_LAST_NAME);
-            userViewModel.createUser(first_name, last_name);
+            Integer id = data.getIntExtra(UserViewActivity.INTENT_RESULT_USER_ID, -1);
+            Integer deleteId = data.getIntExtra(UserViewActivity.INTENT_RESULT_DELETE_USER, -1);
+            if (deleteId != -1){
+                userViewModel.removeUser(deleteId);
+                return;
+            }
+            if (requestCode == 2) {
+                userViewModel.createUser(first_name, last_name);
+                return;
+            }
+            userViewModel.updateUser(id, first_name, last_name);
         }
     }
 

@@ -15,6 +15,7 @@ public class UserViewActivity extends AppCompatActivity {
     public static final String INTENT_RESULT_FIRST_NAME = "first_name";
     public static final String INTENT_RESULT_LAST_NAME = "last_name";
     public static final String INTENT_RESULT_DELETE_USER = "deleteUser";
+    public static final String INTENT_RESULT_USER_ID = "user_id";
     Integer UPDATE_USER = 3;
     Integer DELETE_USER = 4;
     User currentUser = null;
@@ -42,7 +43,7 @@ public class UserViewActivity extends AppCompatActivity {
             Integer id = currentUser.getId();
             Intent output = new Intent();
             output.putExtra(INTENT_RESULT_DELETE_USER, id);
-            setResult(DELETE_USER, output);
+            setResult(RESULT_OK, output);
             finish();
         });
         createButton.setOnClickListener(event -> {
@@ -65,7 +66,8 @@ public class UserViewActivity extends AppCompatActivity {
             output.putExtra(INTENT_RESULT_LAST_NAME, text_lastname);
             setResult(RESULT_OK, output);
             if (currentUser != null){
-                setResult(UPDATE_USER, output);
+                output.putExtra(INTENT_RESULT_USER_ID, currentUser.getId());
+                setResult(RESULT_OK, output);
             }
             finish();
         });
