@@ -1,9 +1,10 @@
 package at.tugraz.software22.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     Integer id_;
     String forename;
     String lastname;
