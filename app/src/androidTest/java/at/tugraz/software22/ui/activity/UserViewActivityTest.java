@@ -1,6 +1,8 @@
 package at.tugraz.software22.ui.activity;
 
+import android.app.Activity;
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -56,10 +58,10 @@ public class UserViewActivityTest{
                 .check(ViewAssertions.matches(ViewMatchers.hasErrorText(expectedString)));
     }
     @Test
-    public void givenValidStoryPoints_whenCreateButtonPressed_thenSetResultAndFinish() {
+    public void givenValidUser_whenCreateButtonPressed_thenSetResultAndFinish() {
         String expectedFirstName = "Stefan";
         String expectedLastName = "Schmidt";
-        ActivityScenario newActivity = ActivityScenario.launch(UserViewActivity.class);
+        ActivityScenario<UserViewActivity> newActivity = ActivityScenario.launch(UserViewActivity.class);
         Espresso.onView(ViewMatchers.withId(R.id.input_firstname_field))
                 .perform(ViewActions.typeText(expectedFirstName));
         Espresso.onView(ViewMatchers.withId(R.id.input_lastname_field))
@@ -72,5 +74,57 @@ public class UserViewActivityTest{
         String actualLastName = extras.getString(UserViewActivity.INTENT_RESULT_LAST_NAME);
         Assert.assertEquals(expectedFirstName, actualFirstName);
         Assert.assertEquals(expectedLastName, actualLastName);
+    }
+
+    @Test
+    public void givenUser_whenEditButtonClicked_thenSetResultAndFinish() {
+        String expectedFirstName = "Stefan";
+        String expectedEditedName = "Hannes";
+        String expectedLastName = "Schmidt";
+        User expectedUser = new User(1, expectedFirstName, expectedLastName);
+        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), UserViewActivity.class);
+        intent.putExtra(UserActivity.INTENT_EXTRA_USER, expectedUser);
+        ActivityScenario newActivity = ActivityScenario.launch(intent);
+        Espresso.onView(ViewMatchers.withText(expectedFirstName))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(expectedLastName))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(R.string.edit_user))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withId(R.id.input_firstname_field))
+                .perform(ViewActions.replaceText(expectedEditedName));
+        Espresso.onView(ViewMatchers.withId(R.id.button))
+                .perform(ViewActions.click());
+        Instrumentation.ActivityResult result = newActivity.getResult();
+        Bundle extras = result.getResultData().getExtras();
+        String actualFirstName = extras.getString(UserViewActivity.INTENT_RESULT_FIRST_NAME);
+        String actualLastName = extras.getString(UserViewActivity.INTENT_RESULT_LAST_NAME);
+        Assert.assertEquals(expectedEditedName, actualFirstName);
+        Assert.assertEquals(expectedLastName, actualLastName);
+    }
+    @Test
+    public void givenUser_whenDeleteButtonClicked_thenSetResultAndFinish() {
+        String expectedFirstName = "Stefan";
+        String expectedEditedName = "Hannes";
+        String expectedLastName = "Schmidt";
+        Integer expectedId = 1;
+        User expectedUser = new User(expectedId, expectedFirstName, expectedLastName);
+        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), UserViewActivity.class);
+        intent.putExtra(UserActivity.INTENT_EXTRA_USER, expectedUser);
+        ActivityScenario<Activity> newActivity = ActivityScenario.launch(intent);
+        Espresso.onView(ViewMatchers.withText(expectedFirstName))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(expectedLastName))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(R.string.edit_user))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withId(R.id.deleteButton))
+                .perform(ViewActions.click());
+        Instrumentation.ActivityResult result = newActivity.getResult();
+        Bundle extras = result.getResultData().getExtras();
+        Integer ID = extras.getInt(UserViewActivity.INTENT_RESULT_DELETE_USER);
+        Assert.assertEquals(expectedId, ID);
     }
 }
