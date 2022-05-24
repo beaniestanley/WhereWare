@@ -1,4 +1,4 @@
-package at.tugraz.software22.ui;
+package at.tugraz.software22.ui.viewmodel;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
@@ -10,13 +10,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
+import at.tugraz.software22.service.OrderService;
+import at.tugraz.software22.ui.WhereWareApplication;
 import at.tugraz.software22.ui.viewmodel.ProductViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,7 +31,7 @@ public class ProductViewModelTest {
     private final Executor currentThreadExecutor = Runnable::run;
 
     @Mock
-    private WherewareApplication applicationMock;
+    private WhereWareApplication applicationMock;
 
     @Mock
     private OrderService orderServiceMock;
@@ -49,15 +52,25 @@ public class ProductViewModelTest {
     }
 
     @Test
-    public void givenOrderServiceWithTwoSprints_whenLoadData_thenVerifyProductsLiveDataChanged() {
+    public void givenOrderServiceWithTwoProducts_whenLoadData_thenVerifyProductsLiveDataChanged() {
         List<Product> expectedProducts = new ArrayList<>();
-        expectedProducts.add(new Product(12, 3, "Superproduct", "Storage 5"));
-        expectedProducts.add(new Product(5, 2, "Topseller", "Storage 2"));
+        expectedProducts.add(new Product(12, 3, "Superproduct", "Storage 5", 1));
+        expectedProducts.add(new Product(5, 2, "Topseller", "Storage 2", 2));
+        Order order = new Order(2, 5, expectedProducts, 1);
 
-        Mockito.when(orderServiceMock.getAll()).thenReturn(expectedProducts);
+        Mockito.when(orderServiceMock.getOrder(1)).thenReturn(order);
 
         productViewModel.loadData();
 
         Mockito.verify(productsLiveDataObserver).onChanged(expectedProducts);
+    }
+
+    @Test
+    public void givenOrderServiceWithoutProduct_whenLoadData_thenVerifyProductsLiveDataChanged() {
+        List<Product> expectedProduct = Collections.emptyList();
+
+        productViewModel.loadData();
+
+        Mockito.verify(productsLiveDataObserver).onChanged(expectedProduct);
     }
 }
