@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-import at.tugraz.software22.WhereWareApplication;
+import at.tugraz.software22.ui.WherewareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
@@ -32,7 +32,7 @@ public class OrderViewModelTest {
     private final Executor currentThreadExecutor = Runnable::run;
 
     @Mock
-    private WhereWareApplication applicationMock;
+    private WherewareApplication applicationMock;
 
     @Mock
     private OrderService orderServiceMock;

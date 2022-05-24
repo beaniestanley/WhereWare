@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.w3c.dom.Text;
 
 import at.tugraz.software22.R;
 import at.tugraz.software22.domain.Product;
+import at.tugraz.software22.domain.Statuses;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
 
@@ -30,7 +32,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         super(context, R.layout.productlist_item);
     }
 
-    public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if(convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.productlist_item, parent, false);
 
@@ -58,8 +60,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         String quantity = getContext().getString(R.string.product_quantity, product.getProductQuantity());
         String location = getContext().getString(R.string.product_location, product.getLocation());
 
-        // TODO accurate status
-        if(product.getStatus() != "pending") {
+        if(product.getStatus() == Statuses.FINISHED) {
             int status = R.drawable.ic_baseline_check_24;
             viewHolder.status.setImageResource(status);
             viewHolder.status.setColorFilter(R.color.grey);

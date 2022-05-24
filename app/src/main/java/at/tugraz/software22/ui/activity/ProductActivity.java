@@ -1,4 +1,4 @@
-package at.tugraz.software22.ui;
+package at.tugraz.software22.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,13 +23,16 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        productViewModel.loadData();
+        setupObservers();
+        setupProductList();
     }
 
     private void setupObservers() {
         productViewModel.getOrderLiveData().observe(this, order -> {
             adapter.clear();
             // TODO get all products
-            adapter.addAll(order.getAllOrders_());
+            adapter.addAll(order);
         });
     }
 

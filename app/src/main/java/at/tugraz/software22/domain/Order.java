@@ -24,7 +24,7 @@ public class Order {
         allOrders_ = products;
     }
 
-    public List<Product> getAllOrders_() {
+    public List<Product> getAllProducts_() {
         return allOrders_;
     }
 
@@ -46,5 +46,9 @@ public class Order {
 
     public void setStatus(Statuses status) {
         this.status = status;
+    }
+
+    public void addProduct(Product product) {
+        allOrders_.add(product);
     }
 }

@@ -7,6 +7,9 @@ import androidx.annotation.VisibleForTesting;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import at.tugraz.software22.data.DummyOrderRepository;
+import at.tugraz.software22.service.OrderService;
+
 public class WherewareApplication extends Application {
 
     private static OrderService orderService;

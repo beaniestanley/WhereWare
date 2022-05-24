@@ -19,7 +19,7 @@ import java.util.concurrent.Executor;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
-import at.tugraz.software22.ui.WhereWareApplication;
+import at.tugraz.software22.ui.WherewareApplication;
 import at.tugraz.software22.ui.viewmodel.ProductViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,7 +31,7 @@ public class ProductViewModelTest {
     private final Executor currentThreadExecutor = Runnable::run;
 
     @Mock
-    private WhereWareApplication applicationMock;
+    private WherewareApplication applicationMock;
 
     @Mock
     private OrderService orderServiceMock;
@@ -63,14 +63,5 @@ public class ProductViewModelTest {
         productViewModel.loadData();
 
         Mockito.verify(productsLiveDataObserver).onChanged(expectedProducts);
-    }
-
-    @Test
-    public void givenOrderServiceWithoutProduct_whenLoadData_thenVerifyProductsLiveDataChanged() {
-        List<Product> expectedProduct = Collections.emptyList();
-
-        productViewModel.loadData();
-
-        Mockito.verify(productsLiveDataObserver).onChanged(expectedProduct);
     }
 }

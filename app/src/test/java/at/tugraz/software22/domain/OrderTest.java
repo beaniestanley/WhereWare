@@ -21,7 +21,7 @@ public class OrderTest{
         Assert.assertEquals(expectedQuantity, firstOrder.getProductQuantity_());
         Assert.assertEquals(expectedTime, firstOrder.getEstimatedTime_());
         Assert.assertEquals(expectedStatus, firstOrder.getStatus());
-        Assert.assertEquals(expectedOrders, firstOrder.getAllOrders_());
+        Assert.assertEquals(expectedOrders, firstOrder.getAllProducts_());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class OrderTest{
         Assert.assertEquals(expectedQuantity, firstOrder.getProductQuantity_());
         Assert.assertEquals(expectedTime, firstOrder.getEstimatedTime_());
         Assert.assertEquals(expectedStatus, firstOrder.getStatus());
-        Assert.assertEquals(expectedOrders, firstOrder.getAllOrders_());
+        Assert.assertEquals(expectedOrders, firstOrder.getAllProducts_());
     }
 
 }

@@ -12,7 +12,7 @@ public class DummyOrder extends Order {
     public DummyOrder() {
         allOrders_ = new ArrayList<>();
         
-        Product p1 = new Product(10, 1, "Xbox Controller", "Regal 1");
+        Product p1 = new Product(10, 1, "Xbox Controller", "Regal 1",1);
         
         allOrders_.add(p1);
     }

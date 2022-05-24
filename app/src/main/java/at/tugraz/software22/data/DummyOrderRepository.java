@@ -52,4 +52,17 @@ public class DummyOrderRepository implements OrderRepository {
     public List<Order> getAll() {
         return orders;
     }
+    
+    public Order getOrder(int id) {
+        for(Order o: orders) {
+            if(o.getId() == id) {
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 }
