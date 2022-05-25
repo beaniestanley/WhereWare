@@ -6,4 +6,10 @@
     <string name="estimated_time">Estimated time: %1$dh %2$dm</string>
     <string name="order_id">Order %1$d</string>
     <string name="unclosed_orders">You have %1$d orders to be completed!</string>
+    <string name="admin">admin</string>
+    <string name="employee">employee</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="invalid_login">Invalid Login. You are not wanted here!</string>
 </resources>
