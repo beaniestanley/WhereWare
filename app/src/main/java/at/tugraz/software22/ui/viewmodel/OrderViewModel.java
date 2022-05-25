@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.service.OrderService;
+import at.tugraz.software22.WhereWareApplication;
 
 public class OrderViewModel extends AndroidViewModel {
 

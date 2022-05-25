@@ -46,8 +46,8 @@ public class WhereWareApplication extends Application {
     }
 
     @VisibleForTesting
-    public static void setSprintService(OrderService testSprintService) {
-        orderService = testSprintService;
+    public static void setOrderService(OrderService testOrderService) {
+        orderService = testOrderService;
     }
     @VisibleForTesting
     public static void setUserService(UserService testUserService) {
