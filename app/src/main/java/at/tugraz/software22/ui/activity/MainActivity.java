@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
         if (loginName.getText().toString().equals(getString(R.string.admin)) && loginPasswd.getText().toString().equals(getString(R.string.admin)))
         {
             //Admin login
-            Intent intent = new Intent(MainActivity.this, ManagerActivity.class);
+            Intent intent = new Intent(MainActivity.this, UserActivity.class);
             startActivity(intent);
         }
         else if (loginName.getText().toString().equals(getString(R.string.employee)) && loginPasswd.getText().toString().equals(getString(R.string.employee)))

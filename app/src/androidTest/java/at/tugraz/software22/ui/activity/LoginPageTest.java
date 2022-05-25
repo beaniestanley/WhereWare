@@ -55,7 +55,7 @@ public class LoginPageTest{
         Espresso.onView(ViewMatchers.withId(R.id.login_passwd)).perform(ViewActions.clearText()).perform(ViewActions.typeText("admin"));
         Espresso.onView(ViewMatchers.withText("LOGIN")).perform(click());
 
-        intended(hasComponent(ManagerActivity.class.getName()));
+        intended(hasComponent(UserActivity.class.getName()));
         Intents.release();
     }
 
