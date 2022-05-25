@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -67,4 +68,44 @@ public class ManagerOrderActivityTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
+    @Test
+    public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatOnlyOneFinishedOrderIsDisplayed() {
+        Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
+        Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
+        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+
+        Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
+        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        order1.setStatus(Statuses.FINISHED);
+        order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
+                1, 15, 30, 0));
+        order1.setEndTime(LocalDateTime.of(2022, Month.MAY,
+                1, 16, 15, 0));
+
+        order2.setStatus(Statuses.FINISHED);
+        order2.setStartTime(LocalDateTime.of(2022, Month.APRIL,
+                29, 19, 30, 0));
+        order2.setEndTime(LocalDateTime.of(2022, Month.APRIL,
+                29, 20, 0, 0));
+        List<Order> expectedOrders = Arrays.asList(order1, order2);
+
+        String expected_title = "Completed Orders";
+        String expected_order_title = "Order " + order1.getId();
+        String expected_collection_time = "Collection Time: " +
+                order1.getCollectionTime().toHours() + "h " +
+                order1.getCollectionTime().toMinutes() % 60 + "m";
+
+        Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
+
+        ActivityScenario.launch(ManagerOrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expected_title))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText(expected_order_title))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText(expected_collection_time))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
 }
