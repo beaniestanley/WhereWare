@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 
+import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.data.DummyOrderRepository;
 import at.tugraz.software22.domain.OrderRepository;
 import at.tugraz.software22.domain.Statuses;
@@ -29,26 +30,12 @@ public class OrderActivityTest {
         Intents.init();
         orderRepository = new DummyOrderRepository();
         orderService = new OrderService(orderRepository);
+        WhereWareApplication.setOrderService(orderService);
     }
 
     @After
     public void tearDown() {
         Intents.release();
-    }
-
-    @Test
-    public void givenOneOrderOnOrderActivity_whenOrderIsClicked_thenDisplayOrderActivity() {
-        Intents.intending(IntentMatchers.hasComponent(OrderActivity.class.getName()));
-
-        String expectedOrder = "Order 1";
-
-        ActivityScenario.launch(OrderActivity.class);
-
-        Espresso.onView(ViewMatchers.withText(expectedOrder))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-
-        Espresso.onView(ViewMatchers.withText(expectedOrder))
-                .perform(ViewActions.click());
     }
 
     @Test
@@ -65,7 +52,7 @@ public class OrderActivityTest {
         Espresso.onView(ViewMatchers.withText(expectedOrder))
                 .perform(ViewActions.click());
 
-        Assert.assertTrue(orderRepository.getAll().get(0).getStartTime()
+        Assert.assertTrue(orderRepository.getOrder(1).getStartTime()
                 .compareTo(LocalDateTime.now()) <= 0);
     }
 
@@ -83,6 +70,6 @@ public class OrderActivityTest {
         Espresso.onView(ViewMatchers.withText(expectedOrder))
                 .perform(ViewActions.click());
 
-        Assert.assertEquals(Statuses.PENDING, orderRepository.getAll().get(0).getStatus());
+        Assert.assertEquals(Statuses.IN_PROCESS, orderRepository.getOrder(1).getStatus());
     }
 }
