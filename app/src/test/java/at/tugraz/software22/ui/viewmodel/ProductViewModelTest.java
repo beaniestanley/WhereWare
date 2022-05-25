@@ -58,7 +58,7 @@ public class ProductViewModelTest {
 
         Mockito.when(orderServiceMock.getOrder(1)).thenReturn(order);
 
-        productViewModel.loadData();
+        productViewModel.loadData(1);
 
         Mockito.verify(productsLiveDataObserver).onChanged(expectedProducts);
     }
