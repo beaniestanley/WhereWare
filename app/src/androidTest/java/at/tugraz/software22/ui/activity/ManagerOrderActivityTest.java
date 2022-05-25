@@ -108,4 +108,38 @@ public class ManagerOrderActivityTest {
         Espresso.onView(ViewMatchers.withText(expected_collection_time))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
+
+    @Test
+    public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatCorrectAverageCollectionTimeIsDisplayed() {
+        Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
+        Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
+        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+
+        Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
+        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        order1.setStatus(Statuses.FINISHED);
+        order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
+                1, 15, 30, 0));
+        order1.setEndTime(LocalDateTime.of(2022, Month.MAY,
+                1, 16, 15, 0));
+
+        order2.setStatus(Statuses.FINISHED);
+        order2.setStartTime(LocalDateTime.of(2022, Month.MAY,
+                29, 19, 30, 0));
+        order2.setEndTime(LocalDateTime.of(2022, Month.MAY,
+                29, 20, 0, 0));
+        List<Order> expectedOrders = Arrays.asList(order1, order2);
+
+        long average_collection_time = (order1.getCollectionTime().toMinutes()
+                + order2.getCollectionTime().toMinutes()) / 2;
+        String expected_average_collection_time = "Average collection time: "
+                + average_collection_time + "minutes";
+
+        Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
+
+        ActivityScenario.launch(ManagerOrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expected_average_collection_time))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
 }
