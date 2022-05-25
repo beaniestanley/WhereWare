@@ -48,29 +48,21 @@ public class MainActivity extends AppCompatActivity{
         EditText loginName = findViewById(R.id.login_name);
         EditText loginPasswd = findViewById(R.id.login_passwd);
 
-        System.out.println("Name = " + loginName.getText());
-        System.out.println("Password = " + loginPasswd.getText());
-        System.out.println("Admin = " + getString(R.string.admin));
-        System.out.println("Employee = " + getString(R.string.employee));
-
         if (loginName.getText().toString().equals(getString(R.string.admin)) && loginPasswd.getText().toString().equals(getString(R.string.admin)))
         {
             //Admin login
-            System.out.println("Admin Login");
             Intent intent = new Intent(MainActivity.this, ManagerActivity.class);
             startActivity(intent);
         }
         else if (loginName.getText().toString().equals(getString(R.string.employee)) && loginPasswd.getText().toString().equals(getString(R.string.employee)))
         {
             //Employee login
-            System.out.println("Employee Login");
             Intent intent = new Intent(MainActivity.this, OrderActivity.class);
             startActivity(intent);
         }
         else
         {
             //Invalid login
-            System.out.println("Invalid Login");
             Toast.makeText(getApplicationContext(), getString(R.string.invalid_login), Toast.LENGTH_SHORT).show();
         }
     }
