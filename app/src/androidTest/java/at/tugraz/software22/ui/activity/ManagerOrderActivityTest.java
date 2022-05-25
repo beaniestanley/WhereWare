@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +49,8 @@ public class ManagerOrderActivityTest {
         order.setEndTime(LocalDateTime.now());
         List<Order> expectedOrders = Collections.singletonList(order);
 
-        String expected_title = "Completed Orders";
+        String expected_title = "Showing " + 1 + " completed orders for "
+                + DateTimeFormatter.ofPattern("MMM YYYY").format(order.getLocalDate());
         String expected_order_title = "Order " + order.getId();
         String expected_collection_time = "Collection Time: " +
             order.getCollectionTime().toHours() + "h " +
@@ -89,7 +91,8 @@ public class ManagerOrderActivityTest {
                 29, 20, 0, 0));
         List<Order> expectedOrders = Arrays.asList(order1, order2);
 
-        String expected_title = "Completed Orders";
+        String expected_title = "Showing " + 1 + " completed orders for "
+                + DateTimeFormatter.ofPattern("MMM YYYY").format(order1.getLocalDate());
         String expected_order_title = "Order " + order1.getId();
         String expected_collection_time = "Collection Time: " +
                 order1.getCollectionTime().toHours() + "h " +
@@ -130,10 +133,10 @@ public class ManagerOrderActivityTest {
                 29, 20, 0, 0));
         List<Order> expectedOrders = Arrays.asList(order1, order2);
 
-        long average_collection_time = (order1.getCollectionTime().toMinutes()
-                + order2.getCollectionTime().toMinutes()) / 2;
+        double average_collection_time = (order1.getCollectionTime().toMinutes()
+                + order2.getCollectionTime().toMinutes()) / 2.0f;
         String expected_average_collection_time = "Average collection time: "
-                + average_collection_time + "minutes";
+                + average_collection_time + " minutes";
 
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
@@ -49,6 +50,18 @@ public class OrderViewModel extends AndroidViewModel {
             this.completedOrders.postValue(
                     orders.stream()
                             .filter(o -> o.getStatus() == Statuses.FINISHED)
+                            .collect(Collectors.toList()));
+        });
+    }
+
+    public void filterCompletedOrdersAndLoad(LocalDate date) {
+        executor.execute(() -> {
+            List<Order> orders = orderService.getAll();
+
+            this.completedOrders.postValue(
+                    orders.stream()
+                            .filter(o -> o.getStatus() == Statuses.FINISHED)
+                            .filter(o -> o.getLocalDate().getMonth().equals(date.getMonth()) && o.getLocalDate().getYear() == date.getYear())
                             .collect(Collectors.toList()));
         });
     }

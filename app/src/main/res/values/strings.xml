@@ -12,4 +12,5 @@
     <string name="manage_orders">Manage Orders</string>
     <string name="hi_manager_what_would_you_like_to_do_today">Hi Manager, what would you like to do today?</string>
     <string name="manage_employees">Manage Employees</string>
+    <string name="filter_orders">Filter Orders</string>
 </resources>

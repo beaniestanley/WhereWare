@@ -1,7 +1,9 @@
 package at.tugraz.software22.domain;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +61,13 @@ public class Order {
 
     public Duration getCollectionTime() {
         return Duration.between(startTime, endTime);
+    }
+
+    public LocalDate getLocalDate() {
+        if(endTime == null)
+            return null;
+
+        return endTime.toLocalDate();
     }
 
     public void startOrder() {
