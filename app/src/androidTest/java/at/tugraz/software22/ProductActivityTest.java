@@ -27,7 +27,7 @@ import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
 import at.tugraz.software22.ui.activity.ProductActivity;
-import at.tugraz.software22.ui.WherewareApplication;
+import at.tugraz.software22.WhereWareApplication;
 
 @RunWith(AndroidJUnit4.class)
 public class ProductActivityTest {
@@ -45,10 +45,10 @@ public class ProductActivityTest {
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WherewareApplication.setOrderService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
-        WherewareApplication.setBackgroundExecutor(currentThreadExecutor);
+        WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
     }
 
     @Before

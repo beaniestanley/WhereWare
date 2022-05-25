@@ -9,11 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-import at.tugraz.software22.data.DummyOrder;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
-import at.tugraz.software22.ui.WherewareApplication;
+import at.tugraz.software22.WhereWareApplication;
 
 public class ProductViewModel extends AndroidViewModel {
     private final OrderService orderService;
@@ -24,7 +23,7 @@ public class ProductViewModel extends AndroidViewModel {
     public ProductViewModel(Application application) {
         super(application);
 
-        WherewareApplication wherewareApplication = (WherewareApplication) application;
+        WhereWareApplication wherewareApplication = (WhereWareApplication) application;
         orderService = wherewareApplication.getOrderService();
         executor = wherewareApplication.getBackgroundExecutor();
     }

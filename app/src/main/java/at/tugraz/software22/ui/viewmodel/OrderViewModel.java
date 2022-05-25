@@ -6,14 +6,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
 import at.tugraz.software22.domain.Order;
-import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
-import at.tugraz.software22.ui.WherewareApplication;
+import at.tugraz.software22.WhereWareApplication;
 
 public class OrderViewModel extends AndroidViewModel {
 
@@ -24,7 +22,7 @@ public class OrderViewModel extends AndroidViewModel {
 
     public OrderViewModel(Application application){
         super(application);
-        WherewareApplication whereWareApplication = (WherewareApplication) getApplication();
+        WhereWareApplication whereWareApplication = (WhereWareApplication) getApplication();
         orderService = whereWareApplication.getOrderService();
         executor = whereWareApplication.getBackgroundExecutor();
     }

@@ -12,15 +12,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
-import at.tugraz.software22.ui.WherewareApplication;
-import at.tugraz.software22.ui.viewmodel.ProductViewModel;
+import at.tugraz.software22.WhereWareApplication;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductViewModelTest {
@@ -31,7 +29,7 @@ public class ProductViewModelTest {
     private final Executor currentThreadExecutor = Runnable::run;
 
     @Mock
-    private WherewareApplication applicationMock;
+    private WhereWareApplication applicationMock;
 
     @Mock
     private OrderService orderServiceMock;

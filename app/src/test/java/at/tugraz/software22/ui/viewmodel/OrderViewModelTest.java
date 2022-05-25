@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -19,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-import at.tugraz.software22.ui.WherewareApplication;
+import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
@@ -32,7 +30,7 @@ public class OrderViewModelTest {
     private final Executor currentThreadExecutor = Runnable::run;
 
     @Mock
-    private WherewareApplication applicationMock;
+    private WhereWareApplication applicationMock;
 
     @Mock
     private OrderService orderServiceMock;

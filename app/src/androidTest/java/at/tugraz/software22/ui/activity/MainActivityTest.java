@@ -34,7 +34,7 @@ public class MainActivityTest{
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WhereWareApplication.setSprintService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
@@ -61,8 +61,8 @@ public class MainActivityTest{
         String expectedTitleOrder2 = "Order 2";
         String expectedTimeOrder1 = "Estimated time: 0h 1m";
         String expectedTimeOrder2 = "Estimated time: 0h 2m";
-        String expectedQuantityOrder1 = "Product Quantity: 1";
-        String expectedQuantityOrder2 = "Product Quantity: 2";
+        String expectedQuantityOrder1 = "Quantity: 1";
+        String expectedQuantityOrder2 = "Quantity: 2";
         Integer expectedQuantity = 1;
         Integer expectedID = 1;
         Integer expectedTime = 1;
