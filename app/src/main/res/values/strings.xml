@@ -23,10 +23,4 @@
     <string name="default_firstname">Max</string>
     <string name="title_firstname">Firstname:</string>
     <string name="edit_user">Edit User</string>
-    <string name="admin">admin</string>
-    <string name="employee">employee</string>
-    <string name="name">Name</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="invalid_login">Invalid Login. You are not wanted here!</string>
 </resources>
