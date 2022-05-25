@@ -1,4 +1,4 @@
-package at.tugraz.software22.ui;
+package at.tugraz.software22;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import at.tugraz.software22.data.DummyUserRepository;
 import at.tugraz.software22.service.OrderService;
 import at.tugraz.software22.service.UserService;
 
-public class WherewareApplication extends Application {
+public class WhereWareApplication extends Application {
 
     private static OrderService orderService;
     private static UserService userService;
@@ -48,18 +48,6 @@ public class WherewareApplication extends Application {
     @VisibleForTesting
     public static void setOrderService(OrderService testOrderService) {
         orderService = testOrderService;
-    }
-    @VisibleForTesting
-    public static void setUserService(UserService testUserService) {
-        userService = testUserService;
-    }
-    @VisibleForTesting
-    public static void setUserService(UserService testUserService) {
-        userService = testUserService;
-    }
-    @VisibleForTesting
-    public static void setUserService(UserService testUserService) {
-        userService = testUserService;
     }
     @VisibleForTesting
     public static void setUserService(UserService testUserService) {

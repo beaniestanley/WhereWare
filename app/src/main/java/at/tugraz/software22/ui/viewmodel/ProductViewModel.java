@@ -14,6 +14,7 @@ import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
 import at.tugraz.software22.WhereWareApplication;
 
+
 public class ProductViewModel extends AndroidViewModel {
     private final OrderService orderService;
     private final Executor executor;

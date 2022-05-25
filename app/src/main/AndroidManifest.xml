@@ -14,7 +14,7 @@
             android:name="at.tugraz.software22.ui.activity.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ProductActivity"
+            android:name=".ui.activity.ProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.ProductActivity"></activity>
+        <activity android:name=".ui.activity.UserViewActivity" />
     </application>
 
 </manifest>
