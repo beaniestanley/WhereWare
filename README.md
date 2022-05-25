@@ -1,26 +1,29 @@
-# [Add your product name]
+# Warehouse Product Locator
 
-*Short name: [Add product short name consisting of 3-15 uppercase characters to be used as issue prefix]*
+*Short name: WPL*
 
-[Describe your product idea in one to three sentences]
+The WPL is an application for warehouse workers to locate a product in the most efficient
+way and collect them in the fastest way.
+The Application shows a list of the orders in each order, whereas every order contains the products and the quantity. 
+With this application, the order collection will be optimized, and the time for order completion will be reduced, resulting in processing more orders per worker. 
 
-## [Add your team name]
 
-*Team number: [Add your team number]*
+## WhereWare
 
-| Name            | Role           |
-| --------------- | -------------- |
-| [Add your name] | Product owner  |
-| [Add your name] | Scrum master   |
-| [Add your name] | Technical lead |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
-| [Add your name] | Developer      |
+*Team number: 22*
+
+| Name                | Role           |
+| ------------------- | -------------- |
+| Yunus Emre Akca     | Product owner  |
+| Frederick Knauder   | Scrum master   |
+| Sebastian Gollob    | Technical Lead |
+| Yuma Buchrieser     | Developer      |
+| Wei Yi Stanley Ho   | Developer      |
+| Dominik König       | Developer      |
+| Martin Rabensteiner | Developer      |
+| Hannes Großauer     | Developer      |
+| Rafael Forsthofer   | Developer      |
+| Ricardo Baljak      | Developer      |
 
 
 ## Notes

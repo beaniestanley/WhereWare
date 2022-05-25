@@ -13,7 +13,7 @@ public class OrderTest{
     public void givenNewOrder_whenConstructor_thenReturnNewOrder(){
         Integer expectedQuantity = 0;
         Integer expectedTime = 0;
-        String expectedStatus = "started";
+        Statuses expectedStatus = Statuses.PENDING;
         List<Product> expectedOrders = new ArrayList<>();
 
         Order firstOrder = new Order();
@@ -21,22 +21,23 @@ public class OrderTest{
         Assert.assertEquals(expectedQuantity, firstOrder.getProductQuantity_());
         Assert.assertEquals(expectedTime, firstOrder.getEstimatedTime_());
         Assert.assertEquals(expectedStatus, firstOrder.getStatus());
-        Assert.assertEquals(expectedOrders, firstOrder.getAllOrders_());
+        Assert.assertEquals(expectedOrders, firstOrder.getAllProducts_());
     }
 
     @Test
     public void givenNewOrderWithParameters_whenConstructor_thenReturnNewOrder(){
         Integer expectedQuantity = 0;
         Integer expectedTime = 0;
-        String expectedStatus = "started";
-        List<Product> expectedOrders = new ArrayList<Product>(Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3")));
+        Integer expectedID = 1;
+        Statuses expectedStatus = Statuses.PENDING;
+        List<Product> expectedOrders = new ArrayList<Product>(Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", expectedID)));
 
-        Order firstOrder = new Order(expectedQuantity, expectedTime, expectedOrders);
+        Order firstOrder = new Order(expectedQuantity, expectedTime, expectedOrders, 1);
 
         Assert.assertEquals(expectedQuantity, firstOrder.getProductQuantity_());
         Assert.assertEquals(expectedTime, firstOrder.getEstimatedTime_());
         Assert.assertEquals(expectedStatus, firstOrder.getStatus());
-        Assert.assertEquals(expectedOrders, firstOrder.getAllOrders_());
+        Assert.assertEquals(expectedOrders, firstOrder.getAllProducts_());
     }
 
 }
