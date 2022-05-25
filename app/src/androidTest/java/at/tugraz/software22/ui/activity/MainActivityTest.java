@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import at.tugraz.software22.R;
-import at.tugraz.software22.ui.WherewareApplication;
+import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
@@ -34,10 +34,10 @@ public class MainActivityTest{
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WherewareApplication.setOrderService(orderServiceMock);
+        WhereWareApplication.setSprintService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
-        WherewareApplication.setBackgroundExecutor(currentThreadExecutor);
+        WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
     }
     @Before
     public void setUp() {
@@ -49,7 +49,7 @@ public class MainActivityTest{
         String expectedTitle = resources.getString(R.string.app_name);
 
         // Launch activity after setup (in that case no setup required)
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
 
         Espresso.onView(ViewMatchers.withText(expectedTitle))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
@@ -73,7 +73,7 @@ public class MainActivityTest{
                 new Order(2, 2,
                         Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder1))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder2))
