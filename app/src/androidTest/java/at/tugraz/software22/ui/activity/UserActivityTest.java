@@ -52,10 +52,6 @@ public class UserActivityTest{
     public void setUp() {
         resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
     }
-    @After
-    public void deconstruct(){
-        Intents.release();
-    }
     @Test
     public void givenUserServiceWithOneUser_whenActivityStarted_thenVerifyThatTheUserIsDisplayed() {
         String expectedString = "Name : Stefan Lang";
@@ -81,6 +77,7 @@ public class UserActivityTest{
 
 
         Mockito.verify(userServiceMock, Mockito.times(1)).addUser("Stefan", "Hauer");
+        Intents.release();
     }
 
     @Test
@@ -103,6 +100,7 @@ public class UserActivityTest{
 
 
         Mockito.verify(userServiceMock, Mockito.times(1)).updateUser(1,"Stefan", "Hauer");
+        Intents.release();
     }
     @Test
     public void givenActivityResultWithIntent_whenDeletingUserActivityReturns_thenVerifyThatAddUserMethodOfUserServiceIsCalled(){
@@ -122,6 +120,7 @@ public class UserActivityTest{
 
 
         Mockito.verify(userServiceMock, Mockito.times(1)).removeUser(1);
+        Intents.release();
     }
 
 }

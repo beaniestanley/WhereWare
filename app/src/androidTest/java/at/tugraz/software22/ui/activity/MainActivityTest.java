@@ -49,7 +49,7 @@ public class MainActivityTest{
         String expectedTitle = resources.getString(R.string.app_name);
 
         // Launch activity after setup (in that case no setup required)
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
 
         Espresso.onView(ViewMatchers.withText(expectedTitle))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
@@ -73,7 +73,7 @@ public class MainActivityTest{
                 new Order(2, 2,
                         Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder1))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder2))
