@@ -17,11 +17,12 @@ public class Order {
         id_ = 1;
     }
 
-    public Order(Integer productQuantity, Integer estimatedTime, List<Product> products, Integer id){
+    public Order(Integer productQuantity, List<Product> products, Integer id){
         id_ = id;
         productQuantity_ = productQuantity;
-        estimatedTime_ = estimatedTime;
         allOrders_ = products;
+        estimatedTime_ = 0;
+        for (Product product: allOrders_) estimatedTime_ += product.getEstimatedTime();
     }
 
     public List<Product> getAllProducts_() {
@@ -50,5 +51,6 @@ public class Order {
 
     public void addProduct(Product product) {
         allOrders_.add(product);
+        estimatedTime_ += product.getEstimatedTime();
     }
 }
