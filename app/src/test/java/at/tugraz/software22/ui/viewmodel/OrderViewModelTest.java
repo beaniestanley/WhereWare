@@ -63,7 +63,7 @@ public class OrderViewModelTest {
     @Test
     public void givenOrderServiceWithOneOrder_whenLoadData_thenVerifyOrderLiveDataChanged() {
         List<Order> expectedOrder = new ArrayList<Order>();
-        expectedOrder.add(new Order(1, 1,
+        expectedOrder.add(new Order(1,
                 Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
 
         Mockito.when(applicationMock.getOrderService().getAll()).thenReturn(expectedOrder);

@@ -63,7 +63,7 @@ public class ProductActivityTest {
         List<Product> productList = new ArrayList<>();
         productList.add(p1);
         productList.add(p2);
-        Order order = new Order(2,5,productList, 1);
+        Order order = new Order(5,productList, 1);
 
         Mockito.when(orderServiceMock.getOrder(1)).thenReturn(order);
 
