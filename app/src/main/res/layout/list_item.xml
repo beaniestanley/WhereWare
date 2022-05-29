@@ -33,4 +33,18 @@
         android:text="@string/product_quantity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_estimated_id" />
+
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:text="Finish"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/text_quantity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_estimated_id"
+        app:layout_constraintTop_toTopOf="@+id/order_id"
+        app:strokeColor="#000000"
+        app:strokeWidth="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

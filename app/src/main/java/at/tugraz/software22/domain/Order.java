@@ -51,4 +51,10 @@ public class Order {
     public void addProduct(Product product) {
         allOrders_.add(product);
     }
+
+    public void finishOrder()
+    {
+        status = Statuses.FINISHED;
+        endTime = LocalDateTime.now();
+    }
 }
