@@ -51,8 +51,8 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         viewHolder.id.setText(getContext().getString(R.string.order_id, order.getId()));
         viewHolder.location.setText(getContext().getString(R.string.product_quantity, order.getProductQuantity_()));
         viewHolder.estimatedTime.setText(getContext().getString(R.string.estimated_time, order.getEstimatedTime_() / 60, order.getEstimatedTime_() % 60));
+
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
             public void onClick(View v) {
                 viewHolder.button.setText("FINISHED");
                 viewHolder.button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_check_24,0,0,0);
