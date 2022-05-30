@@ -68,10 +68,10 @@ public class MainActivityTest{
         Integer expectedTime = 1;
         String expectedName = "Xbox One";
         String expectedLocation = "Aisle 3";
-        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity, expectedTime,
+        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity,
                 Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1),
-                new Order(2, 2,
-                        Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
+                new Order( 2,
+                        Arrays.asList(new Product(2, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
         ActivityScenario.launch(OrderActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder1))

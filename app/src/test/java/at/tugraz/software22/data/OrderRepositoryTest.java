@@ -42,9 +42,9 @@ public class OrderRepositoryTest{
         List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fithProduct, fourthProduct, sixthProduct));
 
 
-        Order expectedFirstOrder = new Order(4, 350, productsOrderOne, 1);
-        Order expectedSecondOrder = new Order(4,700, productsOrderTwo, 2);
-        Order expectedThirdOrder = new Order(4,750, productsOrderThree, 3);
+        Order expectedFirstOrder = new Order(4,  productsOrderOne, 1);
+        Order expectedSecondOrder = new Order(4, productsOrderTwo, 2);
+        Order expectedThirdOrder = new Order(4,productsOrderThree, 3);
 
         Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(0).getProductQuantity_());
         Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(0).getEstimatedTime_());
