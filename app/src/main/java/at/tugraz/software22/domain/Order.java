@@ -51,4 +51,16 @@ public class Order {
     public void addProduct(Product product) {
         allOrders_.add(product);
     }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void startOrder() {
+        if(this.status == Statuses.IN_PROCESS)
+            return;
+
+        this.status = Statuses.IN_PROCESS;
+        this.startTime = LocalDateTime.now();
+    }
 }

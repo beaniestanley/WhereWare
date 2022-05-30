@@ -33,9 +33,9 @@ public class ProductViewModel extends AndroidViewModel {
         return orderLiveData;
     }
 
-    public void loadData() {
+    public void loadData(int order_id) {
         executor.execute(() -> {
-            Order order = orderService.getOrder(1);
+            Order order = orderService.getOrder(order_id);
             orderLiveData.postValue(order.getAllProducts_());
         });
     }

@@ -1,4 +1,4 @@
-package at.tugraz.software22;
+package at.tugraz.software22.ui.activity;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -65,7 +66,7 @@ public class ProductActivityTest {
         productList.add(p2);
         Order order = new Order(2,5,productList, 1);
 
-        Mockito.when(orderServiceMock.getOrder(1)).thenReturn(order);
+        Mockito.when(orderServiceMock.getOrder(Mockito.anyInt())).thenReturn(order);
 
         ActivityScenario.launch(ProductActivity.class);
 
