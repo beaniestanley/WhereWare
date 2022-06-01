@@ -32,8 +32,8 @@ public class FinishOrderTest{
 
     @Test
     public void EspressoTest_whenActivityStarted_verifyInputFieldsExist() {
-        ActivityScenario.launch(OrderActivity.class);
-        Espresso.onData(anything()).inAdapterView(withId(R.id.allOrders)).atPosition(0).onChildView(withId(R.id.finish_button)).perform(click());
-        Espresso.onData(anything()).inAdapterView(withId(R.id.allOrders)).atPosition(0).onChildView(withId(R.id.finish_button)).check(matches(withText("FINISHED")));
+        ActivityScenario.launch(ProductActivity.class);
+        Espresso.onView(withId(R.id.finish_button)).perform(click());
+        Espresso.onView(withId(R.id.finish_button)).check(matches(withText("FINISHED")));
     }
 }
