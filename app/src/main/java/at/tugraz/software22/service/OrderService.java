@@ -17,6 +17,14 @@ public class OrderService {
     public List<Order> getAll() {
         return orderRepository.getAll();
     }
+    
+    public Order getOrder(int id) {
+        return orderRepository.getOrder(id);
+    }
+
+    public void addOrder(Order order) {
+        orderRepository.addOrder(order);
+    }
 
     //TODO afterwards could be used for changing status of products
 //    public void changeStateOfOrder(Integer id, String status){

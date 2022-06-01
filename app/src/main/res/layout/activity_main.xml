@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    tools:context="at.tugraz.software22.ui.activity.MainActivity">
+    tools:context="at.tugraz.software22.ui.activity.OrderActivity">
 
     <TextView
         android:id="@+id/amountOfOrders"

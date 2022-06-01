@@ -1,9 +1,15 @@
 package at.tugraz.software22.ui.activity;
 
 
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+
+import android.widget.DatePicker;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -33,7 +39,7 @@ public class ManagerOrderActivityTest {
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WhereWareApplication.setSprintService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
@@ -102,6 +108,17 @@ public class ManagerOrderActivityTest {
 
         ActivityScenario.launch(ManagerOrderActivity.class);
 
+        Espresso.onView(ViewMatchers.withText("Filter Orders"))
+                .perform(click());
+
+        Espresso.onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(order1.getLocalDate().getYear(),
+                        order1.getLocalDate().getMonthValue(),
+                        order1.getLocalDate().getDayOfMonth()));
+
+        Espresso.onView(ViewMatchers.withText("OK"))
+                .perform(click());
+
         Espresso.onView(ViewMatchers.withText(expected_title))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
@@ -141,6 +158,17 @@ public class ManagerOrderActivityTest {
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
 
         ActivityScenario.launch(ManagerOrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText("Filter Orders"))
+                .perform(click());
+
+        Espresso.onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(order1.getLocalDate().getYear(),
+                        order1.getLocalDate().getMonthValue(),
+                        order1.getLocalDate().getDayOfMonth()));
+
+        Espresso.onView(ViewMatchers.withText("OK"))
+                .perform(click());
 
         Espresso.onView(ViewMatchers.withText(expected_average_collection_time))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));

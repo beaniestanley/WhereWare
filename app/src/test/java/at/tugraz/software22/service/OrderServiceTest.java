@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,10 +64,10 @@ public class OrderServiceTest {
         Assert.assertEquals(expectedTime, actualOrders.get(0).getEstimatedTime_());
         Assert.assertEquals(expectedID, actualOrders.get(0).getId());
         //Asserts for Product
-        Assert.assertEquals(expectedQuantity, actualOrders.get(0).getAllOrders_().get(0).getProductQuantity());
-        Assert.assertEquals(expectedTime, actualOrders.get(0).getAllOrders_().get(0).getEstimatedTime());
-        Assert.assertEquals(expectedName, actualOrders.get(0).getAllOrders_().get(0).getName());
-        Assert.assertEquals(expectedLocation, actualOrders.get(0).getAllOrders_().get(0).getLocation());
+        Assert.assertEquals(expectedQuantity, actualOrders.get(0).getAllProducts_().get(0).getProductQuantity());
+        Assert.assertEquals(expectedTime, actualOrders.get(0).getAllProducts_().get(0).getEstimatedTime());
+        Assert.assertEquals(expectedName, actualOrders.get(0).getAllProducts_().get(0).getName());
+        Assert.assertEquals(expectedLocation, actualOrders.get(0).getAllProducts_().get(0).getLocation());
     }
 
     //TODO afterwards for changing the status of products and orders :)

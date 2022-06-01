@@ -49,17 +49,17 @@ public class OrderRepositoryTest{
         Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(3).getProductQuantity_());
         Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(3).getEstimatedTime_());
         Assert.assertEquals(expectedFirstOrder.getStatus(), ordersActual.get(3).getStatus());
-        Assert.assertEquals(expectedFirstOrder.getAllOrders_().size(), ordersActual.get(3).getAllOrders_().size());
+        Assert.assertEquals(expectedFirstOrder.getAllProducts_().size(), ordersActual.get(3).getAllProducts_().size());
 
         Assert.assertEquals(expectedSecondOrder.getProductQuantity_(), ordersActual.get(1).getProductQuantity_());
         Assert.assertEquals(expectedSecondOrder.getEstimatedTime_(), ordersActual.get(1).getEstimatedTime_());
         Assert.assertEquals(expectedSecondOrder.getStatus(), ordersActual.get(1).getStatus());
-        Assert.assertEquals(expectedSecondOrder.getAllOrders_().size(), ordersActual.get(1).getAllOrders_().size());
+        Assert.assertEquals(expectedSecondOrder.getAllProducts_().size(), ordersActual.get(1).getAllProducts_().size());
 
         Assert.assertEquals(expectedThirdOrder.getProductQuantity_(), ordersActual.get(2).getProductQuantity_());
         Assert.assertEquals(expectedThirdOrder.getEstimatedTime_(), ordersActual.get(2).getEstimatedTime_());
         Assert.assertEquals(expectedThirdOrder.getStatus(), ordersActual.get(2).getStatus());
-        Assert.assertEquals(expectedThirdOrder.getAllOrders_().size(), ordersActual.get(2).getAllOrders_().size());
+        Assert.assertEquals(expectedThirdOrder.getAllProducts_().size(), ordersActual.get(2).getAllProducts_().size());
 
     }
 }
