@@ -35,4 +35,10 @@ public class OrderViewModel extends AndroidViewModel {
             this.orderLiveData.postValue(orders);
         });
     }
+
+    public void startOrder(int orderId) {
+        executor.execute(() -> {
+            orderService.getOrder(orderId).startOrder();
+        });
+    }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,7 +24,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.loadData();
+        productViewModel.loadData(getIntent().getIntExtra("ORDER_ID", -1));
         setupObservers();
         setupProductList();
     }
