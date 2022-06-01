@@ -27,22 +27,22 @@ public class DummyOrderRepository implements OrderRepository {
 
         List<Product> productsOrderOne = new ArrayList<>(Arrays.asList(firstProduct, secondProduct, thirdProduct));
         value = getTimeAndQuantity(productsOrderOne);
-        orders.add(new Order(value.get(0), value.get(1), productsOrderOne, 1));
+        orders.add(new Order(value.get(0), productsOrderOne, 1));
         orders.get(0).startOrder();
         orders.get(0).setStartTime(LocalDateTime.of(2022, 5, 18, 12, 1,0));
         orders.get(0).finishOrder();
 
         List<Product> productsOrderTwo = new ArrayList<>(Arrays.asList(fifthProduct, firstProduct, sixthProduct));
         value = getTimeAndQuantity(productsOrderTwo);
-        orders.add(new Order(value.get(0), value.get(1), productsOrderTwo, 2));
+        orders.add(new Order(value.get(0), productsOrderTwo, 2));
 
         List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fifthProduct, fourthProduct, sixthProduct));
         value = getTimeAndQuantity(productsOrderThree);
-        orders.add(new Order(value.get(0), value.get(1), productsOrderThree, 3));
+        orders.add(new Order(value.get(0), productsOrderThree, 3));
 
         List<Product> productsOrderFour = new ArrayList<>(Arrays.asList(fifthProduct, fourthProduct, sixthProduct));
         value = getTimeAndQuantity(productsOrderFour);
-        orders.add(new Order(value.get(0), value.get(1), productsOrderFour, 3));
+        orders.add(new Order(value.get(0), productsOrderThree, 3));
     }
 
     private ArrayList<Integer> getTimeAndQuantity(List<Product> products) {

@@ -65,4 +65,10 @@ public class OrderViewModel extends AndroidViewModel {
                             .collect(Collectors.toList()));
         });
     }
+
+    public void startOrder(int orderId) {
+        executor.execute(() -> {
+            orderService.getOrder(orderId).startOrder();
+        });
+    }
 }

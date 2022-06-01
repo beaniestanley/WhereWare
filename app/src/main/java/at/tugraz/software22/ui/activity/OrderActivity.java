@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ public class OrderActivity extends AppCompatActivity {
 
     private OrderViewModel orderViewModel;
     private ArrayAdapter<Order> adapter;
-    private View mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +39,14 @@ public class OrderActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.allOrders);
         adapter = new OrderAdapter(this, R.layout.list_item);
         listView.setAdapter(adapter);
-    }
+        listView.setOnItemClickListener((adapterView, view, position, id) -> {
+            int orderId = adapter.getItem(position).getId();
 
+            orderViewModel.startOrder(orderId);
+
+            Intent intent = new Intent(view.getContext(), ProductActivity.class);
+            intent.putExtra("ORDER_ID", orderId);
+            startActivity(intent);
+        });
+    }
 }

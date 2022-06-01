@@ -54,11 +54,11 @@ public class ProductViewModelTest {
         List<Product> expectedProducts = new ArrayList<>();
         expectedProducts.add(new Product(12, 3, "Superproduct", "Storage 5", 1));
         expectedProducts.add(new Product(5, 2, "Topseller", "Storage 2", 2));
-        Order order = new Order(2, 5, expectedProducts, 1);
+        Order order = new Order(2, expectedProducts, 1);
 
         Mockito.when(orderServiceMock.getOrder(1)).thenReturn(order);
 
-        productViewModel.loadData();
+        productViewModel.loadData(1);
 
         Mockito.verify(productsLiveDataObserver).onChanged(expectedProducts);
     }
