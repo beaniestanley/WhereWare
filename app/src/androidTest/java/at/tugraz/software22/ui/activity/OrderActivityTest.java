@@ -42,7 +42,7 @@ public class OrderActivityTest {
     public void givenOneOrderOnOrderActivity_whenOrderIsClicked_thenSaveStartTime() {
         Intents.intending(IntentMatchers.hasComponent(OrderActivity.class.getName()));
 
-        String expectedOrder = "Order 1";
+        String expectedOrder = "Order 2";
 
         ActivityScenario.launch(OrderActivity.class);
 

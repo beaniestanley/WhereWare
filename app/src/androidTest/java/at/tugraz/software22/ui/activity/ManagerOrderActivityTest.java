@@ -49,7 +49,7 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithFinishedOrders_whenActivityStarted_thenVerifyThatFinishedOrdersGetDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order = new Order(45, 23, Arrays.asList(product1, product2), 2);
+        Order order = new Order(45, Arrays.asList(product1, product2), 2);
         order.setStatus(Statuses.FINISHED);
         order.setStartTime(LocalDateTime.MIN);
         order.setEndTime(LocalDateTime.now());
@@ -80,10 +80,10 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatOnlyOneFinishedOrderIsDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+        Order order1 = new Order(45, Arrays.asList(product1, product2), 1);
 
         Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
-        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        Order order2 = new Order(10, Collections.singletonList(product3), 2)   ;
         order1.setStatus(Statuses.FINISHED);
         order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
                 1, 15, 30, 0));
@@ -133,10 +133,10 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatCorrectAverageCollectionTimeIsDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+        Order order1 = new Order(45, Arrays.asList(product1, product2), 1);
 
         Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
-        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        Order order2 = new Order(10, Collections.singletonList(product3), 2)   ;
         order1.setStatus(Statuses.FINISHED);
         order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
                 1, 15, 30, 0));
