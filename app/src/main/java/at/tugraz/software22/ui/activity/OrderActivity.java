@@ -26,7 +26,7 @@ public class OrderActivity extends AppCompatActivity {
 
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
         setupListView();
-        orderViewModel.getOrderLiveData().observe(this, orders -> {
+        orderViewModel.getOpenOrders().observe(this, orders -> {
             TextView createdSprint = findViewById(R.id.amountOfOrders);
             createdSprint.setText(getString(R.string.unclosed_orders, orders.size()));
             adapter.clear();

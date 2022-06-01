@@ -3,7 +3,6 @@ package at.tugraz.software22.ui.viewmodel;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,9 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -23,8 +20,6 @@ import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
 import at.tugraz.software22.service.OrderService;
-import at.tugraz.software22.ui.activity.MainActivity;
-import at.tugraz.software22.ui.activity.OrderActivity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderViewModelTest {
@@ -51,7 +46,7 @@ public class OrderViewModelTest {
 
         orderViewModel = new OrderViewModel(applicationMock);
 
-        orderViewModel.getOrderLiveData().observeForever(orderLiveDataObserver);
+        orderViewModel.getOpenOrders().observeForever(orderLiveDataObserver);
     }
 
     @Test
@@ -66,9 +61,9 @@ public class OrderViewModelTest {
 
     @Test
     public void givenOrderServiceWithOneOrder_whenLoadData_thenVerifyOrderLiveDataChanged() {
-        List<Order> expectedOrder = new ArrayList<Order>();
+        List<Order> expectedOrder = new ArrayList<>();
         expectedOrder.add(new Order(1,
-                Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
+                Collections.singletonList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
 
         Mockito.when(applicationMock.getOrderService().getAll()).thenReturn(expectedOrder);
 

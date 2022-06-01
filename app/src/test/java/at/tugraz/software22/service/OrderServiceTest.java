@@ -40,7 +40,7 @@ public class OrderServiceTest {
 
     @Test
     public void givenRepositoryWithOneOrder_whenGetAll_thenReturnOneOrder() {
-        List<Order> expectedOrders = Arrays.asList(new Order(1, Collections.emptyList(), 1));
+        List<Order> expectedOrders = Collections.singletonList(new Order(1, Collections.emptyList(), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
 
         List<Order> actualOrders = orderService.getAll();
@@ -54,8 +54,8 @@ public class OrderServiceTest {
         Integer expectedTime = 1;
         String expectedName = "Xbox One";
         String expectedLocation = "Aisle 3";
-        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity,
-                Arrays.asList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1));
+        List<Order> expectedOrders = Collections.singletonList(new Order(expectedQuantity,
+                Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
 
         List<Order> actualOrders = orderService.getAll();
