@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import at.tugraz.software22.R;
 import at.tugraz.software22.domain.Order;
+import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.ui.adapter.OrderAdapter;
 import at.tugraz.software22.ui.viewmodel.OrderViewModel;
 
@@ -48,5 +49,23 @@ public class OrderActivity extends AppCompatActivity {
             intent.putExtra("ORDER_ID", orderId);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        for(int i = 0; i < adapter.getCount(); i++){
+            if (adapter.getItem(i).getStatus() == Statuses.FINISHED)
+            {
+                System.out.println(adapter.getItem(i).getStatus());
+                adapter.remove(adapter.getItem(i));
+            }
+        }
+
+        ListView listView = findViewById(R.id.allOrders);
+
+        listView.invalidateViews();
+        TextView createdSprint = findViewById(R.id.amountOfOrders);
+        createdSprint.setText(getString(R.string.unclosed_orders, adapter.getCount()));
     }
 }

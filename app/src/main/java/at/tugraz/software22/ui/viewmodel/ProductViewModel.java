@@ -40,5 +40,11 @@ public class ProductViewModel extends AndroidViewModel {
         });
     }
 
+    public Order getOrder(int order_id)
+    {
+        return orderService.getOrder(order_id);
+    }
+
+
     //If create-function needed, implement here createOrder()
 }
