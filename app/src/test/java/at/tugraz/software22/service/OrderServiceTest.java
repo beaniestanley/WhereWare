@@ -76,11 +76,10 @@ public class OrderServiceTest {
         List<Order> expectedOrders = Arrays.asList(new Order( 1,
                 Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
-        //orderService.tickProduct(1,1);
+        orderService.tickProduct(1,1);
         List<Order> actualOrders = orderService.getAll();
         Assert.assertEquals(Statuses.FINISHED, actualOrders.get(0).getAllProducts_().get(0).getStatus());
-
-        //orderService.tickProduct(1,1);
+        orderService.tickProduct(1,1);
         Assert.assertEquals(Statuses.PENDING, actualOrders.get(0).getAllProducts_().get(0).getStatus());
 
     }
