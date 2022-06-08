@@ -42,4 +42,7 @@ public class Product {
         return id_;
     }
 
+    public void setStatus(Statuses status) {
+        this.status_ = status;
+    }
 }
