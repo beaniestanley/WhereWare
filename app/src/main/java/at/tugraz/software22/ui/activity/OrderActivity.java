@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import at.tugraz.software22.R;
 import at.tugraz.software22.domain.Order;
-import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.ui.adapter.OrderAdapter;
 import at.tugraz.software22.ui.viewmodel.OrderViewModel;
 
@@ -24,6 +24,13 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button buttonLogout = findViewById(R.id.buttonLogoutEmployee);
+
+        buttonLogout.setOnClickListener(l -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        });
 
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
         setupListView();
