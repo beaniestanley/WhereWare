@@ -16,9 +16,11 @@ import org.junit.runner.RunWith;
 import at.tugraz.software22.R;
 
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class FinishOrderTest{
@@ -32,8 +34,11 @@ public class FinishOrderTest{
 
     @Test
     public void EspressoTest_whenActivityStarted_verifyInputFieldsExist() {
-        ActivityScenario.launch(ProductActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
+        Espresso.onData(anything()).inAdapterView(withId(R.id.allOrders)).atPosition(0).perform(click());
         Espresso.onView(withId(R.id.finish_button)).perform(click());
-        Espresso.onView(withId(R.id.finish_button)).check(matches(withText("FINISHED")));
+
+        Espresso.onView(withId(R.id.allOrders))
+                .check(matches(not(hasDescendant(withText("Order 1")))));
     }
 }
