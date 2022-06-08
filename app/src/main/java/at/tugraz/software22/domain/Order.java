@@ -92,10 +92,4 @@ public class Order {
         this.status = Statuses.IN_PROCESS;
         this.startTime = LocalDateTime.now();
     }
-
-    public void finishOrder()
-    {
-        status = Statuses.FINISHED;
-        endTime = LocalDateTime.now();
-    }
 }

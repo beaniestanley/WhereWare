@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.OrderRepository;
 import at.tugraz.software22.domain.Product;
-import at.tugraz.software22.domain.Statuses;
 
 public class DummyOrderRepository implements OrderRepository {
     private final List<Order> orders;
@@ -43,7 +42,7 @@ public class DummyOrderRepository implements OrderRepository {
 
         List<Product> productsOrderFour = new ArrayList<>(Arrays.asList(fifthProduct, fourthProduct, sixthProduct));
         value = getTimeAndQuantity(productsOrderFour);
-        orders.add(new Order(value.get(0), productsOrderThree, 3));
+        orders.add(new Order(value.get(0), productsOrderFour, 4));
     }
 
     private ArrayList<Integer> getTimeAndQuantity(List<Product> products) {

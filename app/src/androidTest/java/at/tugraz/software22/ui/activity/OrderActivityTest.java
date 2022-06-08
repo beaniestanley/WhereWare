@@ -60,7 +60,7 @@ public class OrderActivityTest {
     public void givenOneOrderOnOrderActivity_whenOrderIsClicked_thenChangeStatusToInProcess() {
         Intents.intending(IntentMatchers.hasComponent(OrderActivity.class.getName()));
 
-        String expectedOrder = "Order 1";
+        String expectedOrder = "Order 2";
 
         ActivityScenario.launch(OrderActivity.class);
 
@@ -70,6 +70,6 @@ public class OrderActivityTest {
         Espresso.onView(ViewMatchers.withText(expectedOrder))
                 .perform(ViewActions.click());
 
-        Assert.assertEquals(Statuses.IN_PROCESS, orderRepository.getOrder(1).getStatus());
+        Assert.assertEquals(Statuses.IN_PROCESS, orderRepository.getOrder(2).getStatus());
     }
 }
