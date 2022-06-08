@@ -1,6 +1,7 @@
 package at.tugraz.software22.ui.viewmodel;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -45,6 +46,21 @@ public class ProductViewModel extends AndroidViewModel {
         return orderService.getOrder(order_id);
     }
 
+
+    public boolean tickProduct(int orderId, int productId)
+    {
+        if(orderService.tickProduct(orderId, productId))
+        {
+            executor.execute(() -> {
+                orderLiveData.postValue(orderService.getOrder(orderId).getAllProducts_());
+                System.out.println("Getting: " + orderService.getOrder(orderId).getAllProducts_().get(1));
+                System.out.println("Value: " + orderService.getOrder(orderId).getAllProducts_().get(1).getStatus());
+            });
+
+            return true;
+        }
+        return false;
+    }
 
     //If create-function needed, implement here createOrder()
 }

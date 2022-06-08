@@ -28,6 +28,10 @@
     <string name="default_firstname">Max</string>
     <string name="title_firstname">Firstname:</string>
     <string name="edit_user">Edit User</string>
+    <string name="scan_product">Scan product</string>
+    <string name="no_camera_permission">You need the camera permission to be able to use this app!</string>
+    <string name="scan_invalid_id">Invalid product id!</string>
+    <string name="camera_not_working">Camera does not work!</string>
     <string name="login_title">Login</string>
     <string name="lang_english">English</string>
     <string name="lang_german">German</string>

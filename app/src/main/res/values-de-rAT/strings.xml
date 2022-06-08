@@ -31,4 +31,8 @@
     <string name="lang_german">Deutsch</string>
     <string name="managerOrderActivityShowingOrders">Zeige %1$d fertige Bestellungen für %2$s</string>
     <string name="managerOrderActivityAvgTime">Durchschnittliche Sammelzeit: %1$.2f Minuten</string>
+    <string name="scan_product">Produkt scannen</string>
+    <string name="no_camera_permission">Die Kameraberechtigung wurde nicht zugelassen!</string>
+    <string name="scan_invalid_id">Falsche Produkt-ID!</string>
+    <string name="camera_not_working">Die Kamera funktioniert nicht!</string>
 </resources>
