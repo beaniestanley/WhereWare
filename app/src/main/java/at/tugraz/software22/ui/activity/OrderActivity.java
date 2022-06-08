@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import at.tugraz.software22.R;
 import at.tugraz.software22.domain.Order;
+import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.ui.adapter.OrderAdapter;
 import at.tugraz.software22.ui.viewmodel.OrderViewModel;
 
@@ -48,5 +49,13 @@ public class OrderActivity extends AppCompatActivity {
             intent.putExtra("ORDER_ID", orderId);
             startActivity(intent);
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        orderViewModel.loadData();
     }
 }

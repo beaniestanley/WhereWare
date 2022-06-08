@@ -86,7 +86,7 @@ public class Order {
     }
 
     public void startOrder() {
-        if(this.status == Statuses.IN_PROCESS)
+        if(this.status == Statuses.IN_PROCESS || this.status == Statuses.FINISHED)
             return;
 
         this.status = Statuses.IN_PROCESS;
