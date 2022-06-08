@@ -42,7 +42,7 @@ public class DummyOrderRepository implements OrderRepository {
 
         List<Product> productsOrderFour = new ArrayList<>(Arrays.asList(fifthProduct, fourthProduct, sixthProduct));
         value = getTimeAndQuantity(productsOrderFour);
-        orders.add(new Order(value.get(0), productsOrderThree, 3));
+        orders.add(new Order(value.get(0), productsOrderFour, 4));
     }
 
     private ArrayList<Integer> getTimeAndQuantity(List<Product> products) {

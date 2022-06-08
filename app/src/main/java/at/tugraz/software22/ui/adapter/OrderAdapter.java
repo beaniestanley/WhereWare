@@ -1,10 +1,12 @@
 package at.tugraz.software22.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         TextView id;
         TextView location;
         TextView estimatedTime;
+        Button button;
     }
     public OrderAdapter(@NonNull Context context, int resource) {
         super(context, resource);

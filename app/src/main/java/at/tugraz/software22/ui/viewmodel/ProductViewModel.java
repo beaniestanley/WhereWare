@@ -41,6 +41,12 @@ public class ProductViewModel extends AndroidViewModel {
         });
     }
 
+    public Order getOrder(int order_id)
+    {
+        return orderService.getOrder(order_id);
+    }
+
+
     public boolean tickProduct(int orderId, int productId)
     {
         if(orderService.tickProduct(orderId, productId))

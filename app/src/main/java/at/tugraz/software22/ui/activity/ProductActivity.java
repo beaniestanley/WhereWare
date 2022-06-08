@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,7 +24,9 @@ import android.widget.ListView;
 import com.google.android.material.snackbar.Snackbar;
 
 import at.tugraz.software22.R;
+import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Product;
+import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.ui.adapter.ProductAdapter;
 import at.tugraz.software22.ui.viewmodel.ProductViewModel;
 
@@ -52,6 +56,26 @@ public class ProductActivity extends AppCompatActivity {
         productViewModel.loadData(orderId);
         setupObservers();
         setupProductList();
+
+        Order order = productViewModel.getOrder(getIntent().getIntExtra("ORDER_ID", -1));
+        Button button = findViewById(R.id.finish_button);
+
+        if(order.getStatus() == Statuses.FINISHED)
+        {
+            button.setText("FINISHED");
+            button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_check_24,0,0,0);
+        }
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                button.setText("FINISHED");
+                button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_check_24,0,0,0);
+                order.finishOrder();
+
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        });
     }
 
     private void setupObservers() {
