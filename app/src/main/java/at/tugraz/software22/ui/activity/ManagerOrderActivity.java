@@ -51,8 +51,9 @@ public class ManagerOrderActivity extends AppCompatActivity {
         orderViewModel.getCompletedOrders().observe(this, orders -> {
             adapter.clear();
             adapter.addAll(orders);
-            textViewTitleOrders.setText("Showing " + orders.size() + " completed orders for " + DateTimeFormatter.ofPattern("MMM YYYY").format(selected_date));
-            textViewAverageCollectionTime.setText("Average collection time: " + orders.stream().mapToLong(o -> o.getCollectionTime().toMinutes()).average().orElse(0) + " minutes");
+            textViewTitleOrders.setText(getString(R.string.managerOrderActivityShowingOrders, orders.size(), DateTimeFormatter.ofPattern("MMM YYYY").format(selected_date)));
+            textViewAverageCollectionTime.setText(getString(R.string.managerOrderActivityShowingOrders, orders.size(), DateTimeFormatter.ofPattern("MMM YYYY").format(selected_date)));
+            textViewAverageCollectionTime.setText(getString(R.string.managerOrderActivityAvgTime, orders.stream().mapToLong(o -> o.getCollectionTime().toMinutes()).average().orElse(0)));
         });
 
         orderViewModel.loadData();

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="product_name">Produkt</string>
+    <string name="product_estimatedtime">Geschätze Zeit: %1$d</string>
+    <string name="product_quantity">Anzahl:%1$d</string>
+    <string name="product_location">Ort: %1$s</string>
+    <string name="estimated_time">Geschätze Zeit: %1$dh %2$dm</string>
+    <string name="order_id">Bestellung %1$d</string>
+    <string name="unclosed_orders">Sie haben %1$d Bestellung zu erledigen!</string>
+    <string name="collection_time">Sammelzeit: %1$dh %2$dm</string>
+    <string name="manage_reports">Reports verwalten</string>
+    <string name="manage_products">Produkte verwalten</string>
+    <string name="manage_orders">Bestellungen verwalten</string>
+    <string name="hi_manager_what_would_you_like_to_do_today">Hi Manager, welche was möchten Sie erledigen?</string>
+    <string name="manage_employees">Mitarbeiter verwalten</string>
+    <string name="filter_orders">Bestellungen filtern</string>
+    <string name="name">Name</string>
+    <string name="password">Passwort</string>
+    <string name="login_button">Anmelden</string>
+    <string name="invalid_login">Falscher Benutzername oder Passwort!</string>
+    <string name="user_name_text">Name : %1$s %2$s</string>
+    <string name="text_collection_time">Sammelzeit: PlaceHolder</string>
+    <string name="create_user_text">Benutzer erstellen</string>
+    <string name="default_lastname">Mustermann</string>
+    <string name="title_lastname">Nachname:</string>
+    <string name="default_firstname">Max</string>
+    <string name="title_firstname">Vorname:</string>
+    <string name="edit_user">Benutzer editieren</string>
+    <string name="login_title">Anmeldung</string>
+    <string name="lang_english">Englisch</string>
+    <string name="lang_german">Deutsch</string>
+    <string name="managerOrderActivityShowingOrders">Zeige %1$d fertige Bestellungen für %2$s.</string>
+    <string name="managerOrderActivityAvgTime">Durchschnittliche Sammelzeit: %1$f Minuten</string>
+</resources>
