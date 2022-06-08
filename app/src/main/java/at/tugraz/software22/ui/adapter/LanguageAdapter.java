@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import at.tugraz.software22.R;
@@ -62,6 +64,17 @@ public class LanguageAdapter extends ArrayAdapter<Language> {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         return getCustomView(position, convertView, parent);
+    }
+
+    @Override
+    public void clear() {
+        this.languages.clear();
+        super.clear();
+    }
+
+    public void addAll(@NonNull Collection<? extends Language> collection) {
+        this.languages.addAll(collection);
+        super.addAll(collection);
     }
 
     private View getCustomView(int position, View view, ViewGroup parent)
