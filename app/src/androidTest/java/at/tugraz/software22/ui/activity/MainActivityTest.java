@@ -1,15 +1,22 @@
 package at.tugraz.software22.ui.activity;
 
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -88,6 +95,39 @@ public class MainActivityTest{
         Espresso.onView(ViewMatchers.withText(expectedTimeOrder1))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(expectedTimeOrder2))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenNothing_whenActivityStarted_thenVerifyThatLanguageButtonsAreDisplayed() {
+        String btnGerman = "German";
+        String btnEnglish = "English";
+
+        ActivityScenario.launch(MainActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(btnEnglish))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Espresso.onView(ViewMatchers.withText(btnGerman))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenNothing_whenActivityStarted_thenVerifyThatLanguageButtonWorks() {
+        ActivityScenario.launch(MainActivity.class);
+
+        Espresso.onView(Matchers.allOf(ViewMatchers.isClickable(), ViewMatchers.withText("Login")))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText("English"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Espresso.onView(ViewMatchers.withText("German"))
+                .perform(ViewActions.click());
+
+        Espresso.onView(ViewMatchers.withText("Anmelden"))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 

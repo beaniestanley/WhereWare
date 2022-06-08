@@ -11,6 +11,8 @@ import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,18 @@ public class ManagerActivityTest {
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
+    }
+
+    @Before
+    public void prepare()
+    {
+        Intents.init();
+    }
+
+    @After
+    public void cleanup()
+    {
+        Intents.release();
     }
 
     @Test
@@ -61,7 +75,6 @@ public class ManagerActivityTest {
 
     @Test
     public void whenManageOrdersPressed_thenVerifyThatActivityGetsSwitched() {
-        Intents.init();
         String expected_btn = "Manage Orders";
 
         ActivityScenario.launch(ManagerActivity.class);
@@ -71,7 +84,6 @@ public class ManagerActivityTest {
                 .perform(ViewActions.click());
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
-        Intents.release();
     }
 
 }

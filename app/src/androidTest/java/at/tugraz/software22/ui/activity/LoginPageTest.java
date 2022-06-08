@@ -1,13 +1,16 @@
 package at.tugraz.software22.ui.activity;
 
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 
 import android.content.res.Resources;
+import android.view.View;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -51,8 +54,13 @@ public class LoginPageTest{
         Intents.init();
 
         ActivityScenario.launch(MainActivity.class);
-        Espresso.onView(ViewMatchers.withId(R.id.login_name)).perform(ViewActions.clearText()).perform(ViewActions.typeText("admin"));
-        Espresso.onView(ViewMatchers.withId(R.id.login_passwd)).perform(ViewActions.clearText()).perform(ViewActions.typeText("admin"));
+
+        Espresso.onView(ViewMatchers.withId(R.id.login_name))
+                .perform(click(), ViewActions.replaceText("admin"), closeSoftKeyboard());
+
+        Espresso.onView(ViewMatchers.withId(R.id.login_passwd))
+                .perform(click(), ViewActions.replaceText("admin"), closeSoftKeyboard());
+
         Espresso.onView(ViewMatchers.withText("LOGIN")).perform(click());
 
         intended(hasComponent(ManagerActivity.class.getName()));
@@ -64,9 +72,16 @@ public class LoginPageTest{
         Intents.init();
 
         ActivityScenario.launch(MainActivity.class);
-        Espresso.onView(ViewMatchers.withId(R.id.login_name)).perform(ViewActions.clearText()).perform(ViewActions.typeText("employee"));
-        Espresso.onView(ViewMatchers.withId(R.id.login_passwd)).perform(ViewActions.clearText()).perform(ViewActions.typeText("employee"));
-        Espresso.onView(ViewMatchers.withText("LOGIN")).perform(click());
+
+        Espresso.onView(ViewMatchers.withId(R.id.login_name))
+                .perform(click(), ViewActions.replaceText("employee"), closeSoftKeyboard());
+
+        Espresso.onView(ViewMatchers.withId(R.id.login_passwd))
+                .perform(click(), ViewActions.replaceText("employee"), closeSoftKeyboard());
+
+        Espresso.onView(ViewMatchers.withText("LOGIN"))
+                .perform(click());
+
         intended(hasComponent(OrderActivity.class.getName()));
 
         Intents.release();
