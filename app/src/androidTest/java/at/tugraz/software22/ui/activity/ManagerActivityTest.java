@@ -18,6 +18,7 @@ import org.mockito.Mockito;
 
 import java.util.concurrent.Executor;
 
+import at.tugraz.software22.R;
 import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.service.OrderService;
 
@@ -39,7 +40,7 @@ public class ManagerActivityTest {
         String expected_btn1 = "Manage Employees";
         String expected_btn2 = "Manage Orders";
         String expected_btn3 = "Manage Products";
-        String expected_btn4 = "Manage Reports";
+        String expected_btn4 = "Generate Report";
 
         ActivityScenario.launch(ManagerActivity.class);
 
@@ -72,6 +73,26 @@ public class ManagerActivityTest {
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
         Intents.release();
+    }
+
+    @Test
+    public void whenActivityStarted_thenVerifyThatReportUIIsDisplayed() {
+        String expected_picker_from_hint = "Starting Date";
+        String expected_picker_to_hint = "End Date";
+        int expected_picker_from_id = R.id.start_date_picker;
+        int expected_picker_to_id = R.id.end_date_picker;
+
+        Espresso.onView(ViewMatchers.withText(expected_picker_from_hint))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText(expected_picker_to_hint))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withId(expected_picker_from_id))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withId(expected_picker_to_id))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
 }
