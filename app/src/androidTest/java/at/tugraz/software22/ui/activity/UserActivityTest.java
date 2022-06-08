@@ -48,10 +48,18 @@ public class UserActivityTest{
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
     }
+
     @Before
     public void setUp() {
         resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
+        Intents.init();
     }
+
+    @After
+    public void tearDown() throws Exception {
+        Intents.release();
+    }
+
     @Test
     public void givenUserServiceWithOneUser_whenActivityStarted_thenVerifyThatTheUserIsDisplayed() {
         String expectedString = "Name : Stefan Lang";
@@ -67,7 +75,6 @@ public class UserActivityTest{
         intent.putExtra(UserViewActivity.INTENT_RESULT_FIRST_NAME, "Stefan");
         intent.putExtra(UserViewActivity.INTENT_RESULT_LAST_NAME, "Hauer");
         Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, intent);
-        Intents.init();
         Intents.intending(IntentMatchers.hasComponent(UserViewActivity.class.getName())).respondWith(result);
 
         ActivityScenario.launch(UserActivity.class);
@@ -75,9 +82,7 @@ public class UserActivityTest{
         Espresso.onView(ViewMatchers.withId(R.id.add_user_button))
                 .perform(ViewActions.click());
 
-
         Mockito.verify(userServiceMock, Mockito.times(1)).addUser("Stefan", "Hauer");
-        Intents.release();
     }
 
     @Test
@@ -89,7 +94,6 @@ public class UserActivityTest{
         intent.putExtra(UserViewActivity.INTENT_RESULT_LAST_NAME, "Hauer");
         intent.putExtra(UserViewActivity.INTENT_RESULT_USER_ID, 1);
         Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, intent);
-        Intents.init();
         Intents.intending(IntentMatchers.hasComponent(UserViewActivity.class.getName())).respondWith(result);
 
         ActivityScenario.launch(UserActivity.class);
@@ -100,7 +104,6 @@ public class UserActivityTest{
 
 
         Mockito.verify(userServiceMock, Mockito.times(1)).updateUser(1,"Stefan", "Hauer");
-        Intents.release();
     }
     @Test
     public void givenActivityResultWithIntent_whenDeletingUserActivityReturns_thenVerifyThatAddUserMethodOfUserServiceIsCalled(){
@@ -109,7 +112,6 @@ public class UserActivityTest{
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), UserViewActivity.class);
         intent.putExtra(UserViewActivity.INTENT_RESULT_DELETE_USER, 1);
         Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, intent);
-        Intents.init();
         Intents.intending(IntentMatchers.hasComponent(UserViewActivity.class.getName())).respondWith(result);
 
         ActivityScenario.launch(UserActivity.class);
@@ -120,7 +122,6 @@ public class UserActivityTest{
 
 
         Mockito.verify(userServiceMock, Mockito.times(1)).removeUser(1);
-        Intents.release();
     }
 
 }

@@ -4,8 +4,6 @@ import java.util.List;
 
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.OrderRepository;
-import at.tugraz.software22.domain.Product;
-import at.tugraz.software22.domain.Statuses;
 
 public class OrderService {
 
