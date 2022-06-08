@@ -5,7 +5,10 @@ import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -89,6 +92,31 @@ public class MainActivityTest{
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(expectedTimeOrder2))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenOrderActivity_whenActivityStarted_thenVerifyThatLogoutButtonIsDisplayed() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(OrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenOrderActivity_whenLogoutButtonIsPressed_thenVerifyThatActivitySwitchesToMainActivity() {
+        Intents.init();
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(OrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Intents.intended(IntentMatchers.hasComponent(MainActivity.class.getName()));
+        Intents.release();
     }
 
 }
