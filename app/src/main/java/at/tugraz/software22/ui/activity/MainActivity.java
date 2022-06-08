@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity{
         btnLogin.setOnClickListener(v -> login());
         btnEnglish.setOnClickListener(v -> changeLanguage("en"));
         btnGerman.setOnClickListener(v -> changeLanguage("de"));
-
-        changeLanguage(Locale.getDefault().getLanguage());
     }
 
     private void changeLanguage(String language)

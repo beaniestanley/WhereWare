@@ -31,6 +31,6 @@
     <string name="login_title">Login</string>
     <string name="lang_english">English</string>
     <string name="lang_german">German</string>
-    <string name="managerOrderActivityShowingOrders">Showing %1$d completed orders for %2$s.</string>
-    <string name="managerOrderActivityAvgTime">Average collection time: %1$f minutes</string>
+    <string name="managerOrderActivityShowingOrders">Showing %1$d completed orders for %2$s</string>
+    <string name="managerOrderActivityAvgTime">Average collection time: %1$.2f minutes</string>
 </resources>

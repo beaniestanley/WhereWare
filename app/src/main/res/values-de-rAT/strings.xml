@@ -29,6 +29,6 @@
     <string name="login_title">Anmeldung</string>
     <string name="lang_english">Englisch</string>
     <string name="lang_german">Deutsch</string>
-    <string name="managerOrderActivityShowingOrders">Zeige %1$d fertige Bestellungen für %2$s.</string>
-    <string name="managerOrderActivityAvgTime">Durchschnittliche Sammelzeit: %1$f Minuten</string>
+    <string name="managerOrderActivityShowingOrders">Zeige %1$d fertige Bestellungen für %2$s</string>
+    <string name="managerOrderActivityAvgTime">Durchschnittliche Sammelzeit: %1$.2f Minuten</string>
 </resources>
