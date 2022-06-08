@@ -104,7 +104,6 @@ public class ManagerActivity extends AppCompatActivity {
         // is position from start, third parameter is position from top
         // and then we are passing our variable of paint which is title.
         canvas.drawText("Report", 209, 100, title);
-        canvas.drawText("Geeks for Geeks", 209, 80, title);
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
@@ -115,7 +114,6 @@ public class ManagerActivity extends AppCompatActivity {
         // below line is used for setting
         // our text to center of PDF.
         title.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("This is sample document which we have created.", 396, 560, title);
 
         // after adding all attributes to our
         // PDF file we will be finishing our page.
