@@ -1,6 +1,10 @@
 package at.tugraz.software22.ui.activity;
 
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
@@ -101,9 +105,11 @@ public class MainActivityTest{
 
         ActivityScenario.launch(MainActivity.class);
 
-        Espresso.onView(ViewMatchers.withText(btnGerman))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(btnEnglish))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Espresso.onView(ViewMatchers.withText(btnGerman))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
@@ -113,6 +119,10 @@ public class MainActivityTest{
 
         Espresso.onView(Matchers.allOf(ViewMatchers.isClickable(), ViewMatchers.withText("Login")))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText("English"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
 
         Espresso.onView(ViewMatchers.withText("German"))
                 .perform(ViewActions.click());

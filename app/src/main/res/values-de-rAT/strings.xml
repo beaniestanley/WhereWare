@@ -27,8 +27,6 @@
     <string name="title_firstname">Vorname:</string>
     <string name="edit_user">Benutzer editieren</string>
     <string name="login_title">Anmeldung</string>
-    <string name="lang_english">Englisch</string>
-    <string name="lang_german">Deutsch</string>
     <string name="managerOrderActivityShowingOrders">Zeige %1$d fertige Bestellungen für %2$s</string>
     <string name="managerOrderActivityAvgTime">Durchschnittliche Sammelzeit: %1$.2f Minuten</string>
     <string name="scan_product">Produkt scannen</string>
@@ -36,4 +34,6 @@
     <string name="scan_invalid_id">Falsche Produkt-ID!</string>
     <string name="camera_not_working">Die Kamera funktioniert nicht!</string>
     <string name="finishOrderButton">Bestellung abschließen</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_en">English</string>
 </resources>

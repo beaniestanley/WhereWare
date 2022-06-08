@@ -33,9 +33,9 @@
     <string name="scan_invalid_id">Invalid product id!</string>
     <string name="camera_not_working">Camera does not work!</string>
     <string name="login_title">Login</string>
-    <string name="lang_english">English</string>
-    <string name="lang_german">German</string>
     <string name="managerOrderActivityShowingOrders">Showing %1$d completed orders for %2$s</string>
     <string name="managerOrderActivityAvgTime">Average collection time: %1$.2f minutes</string>
     <string name="finishOrderButton">Finish order</string>
+    <string name="language_de">German</string>
+    <string name="language_en">English</string>
 </resources>
