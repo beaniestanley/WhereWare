@@ -34,7 +34,7 @@ public class ManagerActivityTest {
     @BeforeClass
     public static void beforeClass() {
         OrderService orderServiceMock = Mockito.mock(OrderService.class);
-        WhereWareApplication.setSprintService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
@@ -83,6 +83,7 @@ public class ManagerActivityTest {
                 .perform(ViewActions.click());
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
+        Intents.release();
     }
 
     @Test

@@ -24,5 +24,10 @@ public class ManagerActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), ManagerOrderActivity.class);
             startActivity(intent);
         });
+
+        buttonManageEmployees.setOnClickListener(l -> {
+            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+            startActivity(intent);
+        });
     }
 }

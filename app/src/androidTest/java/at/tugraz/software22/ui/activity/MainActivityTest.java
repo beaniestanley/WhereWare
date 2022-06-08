@@ -38,7 +38,7 @@ public class MainActivityTest{
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WhereWareApplication.setSprintService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
@@ -53,7 +53,7 @@ public class MainActivityTest{
         String expectedTitle = resources.getString(R.string.app_name);
 
         // Launch activity after setup (in that case no setup required)
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
 
         Espresso.onView(ViewMatchers.withText(expectedTitle))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
@@ -65,19 +65,19 @@ public class MainActivityTest{
         String expectedTitleOrder2 = "Order 2";
         String expectedTimeOrder1 = "Estimated time: 0h 1m";
         String expectedTimeOrder2 = "Estimated time: 0h 2m";
-        String expectedQuantityOrder1 = "Product Quantity: 1";
-        String expectedQuantityOrder2 = "Product Quantity: 2";
+        String expectedQuantityOrder1 = "Quantity: 1";
+        String expectedQuantityOrder2 = "Quantity: 2";
         Integer expectedQuantity = 1;
         Integer expectedID = 1;
         Integer expectedTime = 1;
         String expectedName = "Xbox One";
         String expectedLocation = "Aisle 3";
-        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity, expectedTime,
+        List<Order> expectedOrders = Arrays.asList(new Order(expectedQuantity,
                         Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 1),
-                new Order(2, 2,
-                        Collections.singletonList(new Product(expectedTime, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
+                new Order( 2,
+                        Collections.singletonList(new Product(2, expectedQuantity, expectedName, expectedLocation, expectedID)), 2));
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
-        ActivityScenario.launch(MainActivity.class);
+        ActivityScenario.launch(OrderActivity.class);
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder1))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
         Espresso.onView(ViewMatchers.withText(expectedTitleOrder2))

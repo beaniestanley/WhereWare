@@ -41,25 +41,26 @@ public class OrderRepositoryTest{
         List<Product> productsOrderTwo = new ArrayList<>(Arrays.asList(fithProduct, firstProduct, sixthProduct));
         List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fithProduct, fourthProduct, sixthProduct));
 
+        Order expectedFirstOrder = new Order(4,  productsOrderOne, 1);
+        Order expectedSecondOrder = new Order(4, productsOrderTwo, 2);
+        Order expectedThirdOrder = new Order(4,productsOrderThree, 3);
 
-        Order expectedFirstOrder = new Order(4, 750, productsOrderOne, 1);
-        Order expectedSecondOrder = new Order(4,700, productsOrderTwo, 2);
-        Order expectedThirdOrder = new Order(4,750, productsOrderThree, 3);
+        expectedFirstOrder.finishOrder();
 
-        Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(3).getProductQuantity_());
-        Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(3).getEstimatedTime_());
-        Assert.assertEquals(expectedFirstOrder.getStatus(), ordersActual.get(3).getStatus());
-        Assert.assertEquals(expectedFirstOrder.getAllOrders_().size(), ordersActual.get(3).getAllOrders_().size());
+        Assert.assertEquals(expectedFirstOrder.getProductQuantity_(), ordersActual.get(0).getProductQuantity_());
+        Assert.assertEquals(expectedFirstOrder.getEstimatedTime_(), ordersActual.get(0).getEstimatedTime_());
+        Assert.assertEquals(expectedFirstOrder.getStatus(), ordersActual.get(0).getStatus());
+        Assert.assertEquals(expectedFirstOrder.getAllProducts_().size(), ordersActual.get(0).getAllProducts_().size());
 
         Assert.assertEquals(expectedSecondOrder.getProductQuantity_(), ordersActual.get(1).getProductQuantity_());
         Assert.assertEquals(expectedSecondOrder.getEstimatedTime_(), ordersActual.get(1).getEstimatedTime_());
         Assert.assertEquals(expectedSecondOrder.getStatus(), ordersActual.get(1).getStatus());
-        Assert.assertEquals(expectedSecondOrder.getAllOrders_().size(), ordersActual.get(1).getAllOrders_().size());
+        Assert.assertEquals(expectedSecondOrder.getAllProducts_().size(), ordersActual.get(1).getAllProducts_().size());
 
         Assert.assertEquals(expectedThirdOrder.getProductQuantity_(), ordersActual.get(2).getProductQuantity_());
         Assert.assertEquals(expectedThirdOrder.getEstimatedTime_(), ordersActual.get(2).getEstimatedTime_());
         Assert.assertEquals(expectedThirdOrder.getStatus(), ordersActual.get(2).getStatus());
-        Assert.assertEquals(expectedThirdOrder.getAllOrders_().size(), ordersActual.get(2).getAllOrders_().size());
+        Assert.assertEquals(expectedThirdOrder.getAllProducts_().size(), ordersActual.get(2).getAllProducts_().size());
 
     }
 }

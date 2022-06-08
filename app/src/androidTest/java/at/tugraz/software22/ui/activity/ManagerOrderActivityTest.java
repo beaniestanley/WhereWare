@@ -1,9 +1,15 @@
 package at.tugraz.software22.ui.activity;
 
 
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+
+import android.widget.DatePicker;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -33,7 +39,7 @@ public class ManagerOrderActivityTest {
     @BeforeClass
     public static void beforeClass() {
         orderServiceMock = Mockito.mock(OrderService.class);
-        WhereWareApplication.setSprintService(orderServiceMock);
+        WhereWareApplication.setOrderService(orderServiceMock);
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
@@ -43,7 +49,7 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithFinishedOrders_whenActivityStarted_thenVerifyThatFinishedOrdersGetDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order = new Order(45, 23, Arrays.asList(product1, product2), 2);
+        Order order = new Order(45, Arrays.asList(product1, product2), 2);
         order.setStatus(Statuses.FINISHED);
         order.setStartTime(LocalDateTime.MIN);
         order.setEndTime(LocalDateTime.now());
@@ -74,10 +80,10 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatOnlyOneFinishedOrderIsDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+        Order order1 = new Order(45, Arrays.asList(product1, product2), 1);
 
         Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
-        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        Order order2 = new Order(10, Collections.singletonList(product3), 2)   ;
         order1.setStatus(Statuses.FINISHED);
         order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
                 1, 15, 30, 0));
@@ -102,6 +108,17 @@ public class ManagerOrderActivityTest {
 
         ActivityScenario.launch(ManagerOrderActivity.class);
 
+        Espresso.onView(ViewMatchers.withText("Filter Orders"))
+                .perform(click());
+
+        Espresso.onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(order1.getLocalDate().getYear(),
+                        order1.getLocalDate().getMonthValue(),
+                        order1.getLocalDate().getDayOfMonth()));
+
+        Espresso.onView(ViewMatchers.withText("OK"))
+                .perform(click());
+
         Espresso.onView(ViewMatchers.withText(expected_title))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
@@ -116,10 +133,10 @@ public class ManagerOrderActivityTest {
     public void givenOrderServiceWithTwoFinishedOrders_whenMay2022IsSelected_thenVerifyThatCorrectAverageCollectionTimeIsDisplayed() {
         Product product1 = new Product(12, 1, "Keyboard", "Regal 3E", 1);
         Product product2 = new Product(26, 12, "Controller", "Regal 9D", 2);
-        Order order1 = new Order(45, 23, Arrays.asList(product1, product2), 1);
+        Order order1 = new Order(45, Arrays.asList(product1, product2), 1);
 
         Product product3 = new Product(10, 3, "Mouse", "Regal 10A", 3);
-        Order order2 = new Order(10, 25, Collections.singletonList(product3), 2)   ;
+        Order order2 = new Order(10, Collections.singletonList(product3), 2)   ;
         order1.setStatus(Statuses.FINISHED);
         order1.setStartTime(LocalDateTime.of(2022, Month.MAY,
                 1, 15, 30, 0));
@@ -141,6 +158,17 @@ public class ManagerOrderActivityTest {
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
 
         ActivityScenario.launch(ManagerOrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText("Filter Orders"))
+                .perform(click());
+
+        Espresso.onView(isAssignableFrom(DatePicker.class))
+                .perform(PickerActions.setDate(order1.getLocalDate().getYear(),
+                        order1.getLocalDate().getMonthValue(),
+                        order1.getLocalDate().getDayOfMonth()));
+
+        Espresso.onView(ViewMatchers.withText("OK"))
+                .perform(click());
 
         Espresso.onView(ViewMatchers.withText(expected_average_collection_time))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));

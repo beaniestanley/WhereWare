@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.service.OrderService;
+import at.tugraz.software22.WhereWareApplication;
 
 public class OrderViewModel extends AndroidViewModel {
 
@@ -63,6 +63,12 @@ public class OrderViewModel extends AndroidViewModel {
                             .filter(o -> o.getStatus() == Statuses.FINISHED)
                             .filter(o -> o.getLocalDate().getMonth().equals(date.getMonth()) && o.getLocalDate().getYear() == date.getYear())
                             .collect(Collectors.toList()));
+        });
+    }
+
+    public void startOrder(int orderId) {
+        executor.execute(() -> {
+            orderService.getOrder(orderId).startOrder();
         });
     }
 }

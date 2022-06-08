@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="at.tugraz.software22">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:name=".WhereWareApplication"
         android:allowBackup="true"
@@ -11,10 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject">
         <activity
+            android:name=".ui.activity.CameraScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ManagerOrderActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ProductActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
@@ -25,6 +40,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.OrderActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ORDER" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.UserViewActivity" />
     </application>
 
 </manifest>
