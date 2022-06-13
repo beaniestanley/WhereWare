@@ -2,6 +2,17 @@ package at.tugraz.software22.ui.activity;
 
 
 
+import static android.app.PendingIntent.getActivity;
+import static android.service.autofill.Validators.not;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.Matchers.is;
+import static java.util.regex.Pattern.matches;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
@@ -11,6 +22,7 @@ import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,20 +56,20 @@ public class ManagerActivityTest {
 
         ActivityScenario.launch(ManagerActivity.class);
 
-        Espresso.onView(ViewMatchers.withText(expected_title))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_title))
+                .check(ViewAssertions.matches(isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withText(expected_btn1))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_btn1))
+                .check(ViewAssertions.matches(isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withText(expected_btn2))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_btn2))
+                .check(ViewAssertions.matches(isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withText(expected_btn3))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_btn3))
+                .check(ViewAssertions.matches(isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withText(expected_btn4))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_btn4))
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
     @Test
@@ -67,8 +79,8 @@ public class ManagerActivityTest {
 
         ActivityScenario.launch(ManagerActivity.class);
 
-        Espresso.onView(ViewMatchers.withText(expected_btn))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(withText(expected_btn))
+                .check(ViewAssertions.matches(isDisplayed()))
                 .perform(ViewActions.click());
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
@@ -82,17 +94,26 @@ public class ManagerActivityTest {
         int expected_picker_from_id = R.id.start_date_picker;
         int expected_picker_to_id = R.id.end_date_picker;
 
-        Espresso.onView(ViewMatchers.withText(expected_picker_from_hint))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_picker_from_hint))
+                .check(ViewAssertions.matches(isDisplayed()));
 
-        Espresso.onView(ViewMatchers.withText(expected_picker_to_hint))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withText(expected_picker_to_hint))
+                .check(ViewAssertions.matches(isDisplayed()));
 
         Espresso.onView(ViewMatchers.withId(expected_picker_from_id))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+                .check(ViewAssertions.matches(isDisplayed()));
 
         Espresso.onView(ViewMatchers.withId(expected_picker_to_id))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
+    @Test
+    public void whenInvalidDate_ToastIsDisplayed() {
+        Espresso.onView(ViewMatchers.withId(R.id.start_date_picker))
+                .perform(ViewActions.replaceText("11.50.1998"));
+        Espresso.onView(ViewMatchers.withId(R.id.end_date_picker))
+                .perform(ViewActions.replaceText("11.10.1998"));
+
+        Espresso.onView(withId(R.id.start_date_picker)).check(ViewAssertions.matches(hasErrorText(R.string.invalid_date)));
 }
+    }
