@@ -12,6 +12,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,9 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import at.tugraz.software22.R;
 
@@ -40,6 +44,8 @@ public class ManagerActivity extends AppCompatActivity {
         Button buttonManageOrders = findViewById(R.id.buttonManageOrders);
         Button buttonManageProducts = findViewById(R.id.buttonManageProducts);
         Button buttonManageReports = findViewById(R.id.buttonManageReports);
+        EditText editTextStartDatePicker = findViewById(R.id.start_date_picker);
+        EditText editTextEndDatePicker = findViewById(R.id.end_date_picker);
 
         buttonManageOrders.setOnClickListener(l -> {
             Intent intent = new Intent(getApplicationContext(), ManagerOrderActivity.class);
@@ -52,7 +58,37 @@ public class ManagerActivity extends AppCompatActivity {
         });
 
         buttonManageReports.setOnClickListener(l -> {
-            generatePDF();
+            String startDate_str = editTextStartDatePicker.getText().toString();
+            String endDate_str = editTextEndDatePicker.getText().toString();
+
+            boolean bothDatesValid = true;
+
+            if(!isValidDate(startDate_str)) {
+                editTextStartDatePicker.setError(getString(R.string.invalid_date));
+                bothDatesValid = false;
+            }
+            if(!isValidDate(endDate_str)) {
+                editTextEndDatePicker.setError(getString(R.string.invalid_date));
+                bothDatesValid = false;
+            }
+
+            if(bothDatesValid) {
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                LocalDate startDate = LocalDate.parse(startDate_str, dateFormatter);
+                LocalDate endDate = LocalDate.parse(endDate_str, dateFormatter);
+
+                if(startDate.isAfter(LocalDate.now())) {
+                    editTextStartDatePicker.setError(getString(R.string.invalid_date_in_future));
+                    bothDatesValid = false;
+                }
+                if(startDate.isAfter(endDate)) {
+                    editTextEndDatePicker.setError(getString(R.string.invalid_date_end_before_start));
+                    bothDatesValid = false;
+                }
+
+                if(bothDatesValid)
+                    generatePDF();
+            }
         });
     }
 
@@ -173,5 +209,15 @@ public class ManagerActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public boolean isValidDate(String dateStr) {
+        try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            LocalDate.parse(dateStr, dateFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 }

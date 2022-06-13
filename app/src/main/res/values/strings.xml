@@ -10,7 +10,7 @@
     <string name="order_id">Order %1$d</string>
     <string name="unclosed_orders">You have %1$d orders to be completed!</string>
     <string name="collection_time">Collection Time: %1$dh %2$dm</string>
-    <string name="manage_reports">Generate report</string>
+    <string name="manage_reports">Generate Report</string>
     <string name="manage_products">Manage Products</string>
     <string name="manage_orders">Manage Orders</string>
     <string name="hi_manager_what_would_you_like_to_do_today">Hi Manager, what would you like to do today?</string>
@@ -30,4 +30,7 @@
     <string name="default_firstname">Max</string>
     <string name="title_firstname">Firstname:</string>
     <string name="edit_user">Edit User</string>
+    <string name="invalid_date">Invalid Date</string>
+    <string name="invalid_date_in_future">Date is in future</string>
+    <string name="invalid_date_end_before_start">End Date is in before Start Date</string>
 </resources>

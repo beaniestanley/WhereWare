@@ -13,6 +13,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.is;
 import static java.util.regex.Pattern.matches;
 
+import android.content.res.Resources;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
@@ -21,8 +23,10 @@ import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +40,7 @@ import at.tugraz.software22.service.OrderService;
 
 @RunWith(AndroidJUnit4.class)
 public class ManagerActivityTest {
+    private Resources resources;
 
     @BeforeClass
     public static void beforeClass() {
@@ -44,6 +49,10 @@ public class ManagerActivityTest {
 
         Executor currentThreadExecutor = Runnable::run;
         WhereWareApplication.setBackgroundExecutor(currentThreadExecutor);
+    }
+    @Before
+    public void setUp() {
+        resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
     }
 
     @Test
@@ -94,6 +103,8 @@ public class ManagerActivityTest {
         int expected_picker_from_id = R.id.start_date_picker;
         int expected_picker_to_id = R.id.end_date_picker;
 
+        ActivityScenario.launch(ManagerActivity.class);
+
         Espresso.onView(withText(expected_picker_from_hint))
                 .check(ViewAssertions.matches(isDisplayed()));
 
@@ -109,11 +120,16 @@ public class ManagerActivityTest {
 
     @Test
     public void whenInvalidDate_ToastIsDisplayed() {
+
+        ActivityScenario.launch(ManagerActivity.class);
+
         Espresso.onView(ViewMatchers.withId(R.id.start_date_picker))
                 .perform(ViewActions.replaceText("11.50.1998"));
         Espresso.onView(ViewMatchers.withId(R.id.end_date_picker))
                 .perform(ViewActions.replaceText("11.10.1998"));
+        Espresso.onView(ViewMatchers.withId(R.id.buttonManageReports))
+                .perform(ViewActions.click());
 
-        Espresso.onView(withId(R.id.start_date_picker)).check(ViewAssertions.matches(hasErrorText(R.string.invalid_date)));
+        Espresso.onView(withId(R.id.start_date_picker)).check(ViewAssertions.matches(hasErrorText(resources.getString(R.string.invalid_date))));
 }
     }
