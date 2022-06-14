@@ -30,7 +30,7 @@ import at.tugraz.software22.domain.Statuses;
 import at.tugraz.software22.ui.adapter.ProductAdapter;
 import at.tugraz.software22.ui.viewmodel.ProductViewModel;
 
-public class ProductActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity{
 
     public final static int CAMERA_REQUEST_CODE = 420;
     public final static int CAMERA_SCAN_ERROR = 421;
@@ -40,6 +40,7 @@ public class ProductActivity extends AppCompatActivity {
     private Button scanProductButton;
 
     private int orderId;
+    public static String INTENT_EXTRA_PRODUCT = "product_object";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,13 @@ public class ProductActivity extends AppCompatActivity {
 
         adapter = new ProductAdapter(this, productViewModel, orderId);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener((adapterView, view, position, id) -> {
+            String aisle_location = adapter.getItem(position).getLocation();
+
+            Intent intent = new Intent(ProductActivity.this, MapActivity.class);
+            intent.putExtra(INTENT_EXTRA_PRODUCT, aisle_location);
+            startActivity(intent);
+        });
     }
 
     private void setupPermissions()
