@@ -24,22 +24,22 @@ public class ReportTest {
     private OrderRepository orderRepositoryMock;
 
     private OrderService orderService;
+    List<Order> fullList;
+    List<Product> emptyList;
+    Order o1;
+    Order o2;
+    Order o3;
 
+    @Before
     public void setUp() {
-
-    }
-
-    @Test
-    public void givenTimeFrame_whenGetOrders_onlyDeliverAskedOrders() {
+        emptyList = new ArrayList<Product>();
+        fullList = new ArrayList<Order>();
         orderRepositoryMock = mock(OrderRepository.class);
         orderService = new OrderService(orderRepositoryMock);
-        List<Product> emptyList = new ArrayList<Product>();
-        List<Order> fullList = new ArrayList<Order>();
-        List<Order> expectedList = new ArrayList<Order>();
 
-        Order o1 = new Order(1, emptyList, 1);
-        Order o2 = new Order(1, emptyList, 2);
-        Order o3 = new Order(1, emptyList, 3);
+        o1 = new Order(1, emptyList, 1);
+        o2 = new Order(1, emptyList, 2);
+        o3 = new Order(1, emptyList, 3);
 
         o1.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 1));
         o1.setEndTime(LocalDateTime.of(2022, 6, 2, 0, 0, 0));
@@ -52,10 +52,15 @@ public class ReportTest {
         fullList.add(o2);
         fullList.add(o3);
 
+        Mockito.when(orderRepositoryMock.getAll()).thenReturn(fullList);
+    }
+
+    @Test
+    public void givenTimeFrame_whenGetOrders_onlyDeliverAskedOrders() {
+        List<Order> expectedList = new ArrayList<Order>();
+
         expectedList.add(o1);
         expectedList.add(o2);
-
-        Mockito.when(orderRepositoryMock.getAll()).thenReturn(fullList);
 
         LocalDateTime startDate = LocalDateTime.of(2022, 6, 1, 0, 0, 0);
         LocalDateTime endDate = LocalDateTime.of(2022, 6, 30, 0, 0, 0);
@@ -67,28 +72,7 @@ public class ReportTest {
 
     @Test
     public void givenTimeFrameWithoutOrders_whenGetOrders_deliverNoOrders() {
-        orderRepositoryMock = mock(OrderRepository.class);
-        orderService = new OrderService(orderRepositoryMock);
-        List<Product> emptyList = new ArrayList<Product>();
-        List<Order> fullList = new ArrayList<Order>();
         List<Order> expectedList = new ArrayList<Order>();
-
-        Order o1 = new Order(1, emptyList, 1);
-        Order o2 = new Order(1, emptyList, 2);
-        Order o3 = new Order(1, emptyList, 3);
-
-        o1.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 0));
-        o1.setEndTime(LocalDateTime.of(2022, 6, 2, 0, 0, 0));
-        o2.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 0));
-        o2.setEndTime(LocalDateTime.of(2022, 6, 2, 0, 0, 0));
-        o3.setStartTime(LocalDateTime.of(2022, 7, 1, 0, 0, 0));
-        o3.setEndTime(LocalDateTime.of(2022, 7, 2, 0, 0, 0));
-
-        fullList.add(o1);
-        fullList.add(o2);
-        fullList.add(o3);
-
-        Mockito.when(orderRepositoryMock.getAll()).thenReturn(fullList);
 
         LocalDateTime startDate = LocalDateTime.of(1990, 6, 1, 0, 0, 0);
         LocalDateTime endDate = LocalDateTime.of(1990, 6, 30, 0, 0, 0);
