@@ -85,6 +85,10 @@ public class Order {
         return startTime;
     }
 
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     public void startOrder() {
         if(this.status == Statuses.IN_PROCESS || this.status == Statuses.FINISHED)
             return;

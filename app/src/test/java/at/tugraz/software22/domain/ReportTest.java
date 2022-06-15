@@ -1,5 +1,7 @@
 package at.tugraz.software22.domain;
 
+import static org.mockito.Mockito.mock;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,11 +26,13 @@ public class ReportTest {
     private OrderService orderService;
 
     public void setUp() {
-        orderService = new OrderService(orderRepositoryMock);
+
     }
 
     @Test
     public void givenTimeFrame_whenGetOrders_onlyDeliverAskedOrders() {
+        orderRepositoryMock = mock(OrderRepository.class);
+        orderService = new OrderService(orderRepositoryMock);
         List<Product> emptyList = new ArrayList<Product>();
         List<Order> fullList = new ArrayList<Order>();
         List<Order> expectedList = new ArrayList<Order>();
@@ -37,9 +41,9 @@ public class ReportTest {
         Order o2 = new Order(1, emptyList, 2);
         Order o3 = new Order(1, emptyList, 3);
 
-        o1.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 0));
+        o1.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 1));
         o1.setEndTime(LocalDateTime.of(2022, 6, 2, 0, 0, 0));
-        o2.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 0));
+        o2.setStartTime(LocalDateTime.of(2022, 6, 1, 0, 0, 1));
         o2.setEndTime(LocalDateTime.of(2022, 6, 2, 0, 0, 0));
         o3.setStartTime(LocalDateTime.of(2022, 7, 1, 0, 0, 0));
         o3.setEndTime(LocalDateTime.of(2022, 7, 2, 0, 0, 0));
@@ -63,6 +67,8 @@ public class ReportTest {
 
     @Test
     public void givenTimeFrameWithoutOrders_whenGetOrders_deliverNoOrders() {
+        orderRepositoryMock = mock(OrderRepository.class);
+        orderService = new OrderService(orderRepositoryMock);
         List<Product> emptyList = new ArrayList<Product>();
         List<Order> fullList = new ArrayList<Order>();
         List<Order> expectedList = new ArrayList<Order>();

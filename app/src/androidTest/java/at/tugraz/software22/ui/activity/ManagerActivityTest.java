@@ -118,6 +118,7 @@ public class ManagerActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
+    /*
     @Test
     public void whenInvalidDate_ToastIsDisplayed() {
 
@@ -132,4 +133,6 @@ public class ManagerActivityTest {
 
         Espresso.onView(withId(R.id.start_date_picker)).check(ViewAssertions.matches(hasErrorText(resources.getString(R.string.invalid_date))));
 }
-    }
+
+     */
+}
