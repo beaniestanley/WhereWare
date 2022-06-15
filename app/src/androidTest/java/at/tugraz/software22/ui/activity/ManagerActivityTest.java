@@ -11,6 +11,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 import static java.util.regex.Pattern.matches;
 
 import android.content.res.Resources;
@@ -32,6 +33,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
+import java.io.File;
 import java.util.concurrent.Executor;
 
 import at.tugraz.software22.R;
@@ -118,7 +120,19 @@ public class ManagerActivityTest {
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
-    /*
+
+    @Test
+    public void whenReportGenerationStarted_thenVerifyThatReportIsCreated() {
+        ActivityScenario.launch(ManagerActivity.class);
+
+        Espresso.onView(ViewMatchers.withId(R.id.start_date_picker)).perform(ViewActions.replaceText("01.01.1990"));
+        Espresso.onView(ViewMatchers.withId(R.id.end_date_picker)).perform(ViewActions.replaceText("01.01.2050"));
+        Espresso.onView(ViewMatchers.withId(R.id.buttonManageReports)).perform(ViewActions.click());
+
+        File file = new File("storage/self/primary/Documents/GFG.pdf");
+        assertTrue(file.exists());
+    }
+
     @Test
     public void whenInvalidDate_ToastIsDisplayed() {
 
@@ -132,7 +146,5 @@ public class ManagerActivityTest {
                 .perform(ViewActions.click());
 
         Espresso.onView(withId(R.id.start_date_picker)).check(ViewAssertions.matches(hasErrorText(resources.getString(R.string.invalid_date))));
-}
-
-     */
+    }
 }
