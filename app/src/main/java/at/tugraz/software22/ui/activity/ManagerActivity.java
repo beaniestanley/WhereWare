@@ -32,8 +32,7 @@ public class ManagerActivity extends AppCompatActivity {
         });
 
         buttonLogout.setOnClickListener(l -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            finish();
         });
     }
 }

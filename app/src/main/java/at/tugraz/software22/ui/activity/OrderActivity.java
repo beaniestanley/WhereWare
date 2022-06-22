@@ -28,8 +28,7 @@ public class OrderActivity extends AppCompatActivity {
         Button buttonLogout = findViewById(R.id.buttonLogoutEmployee);
 
         buttonLogout.setOnClickListener(l -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            finish();
         });
 
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);

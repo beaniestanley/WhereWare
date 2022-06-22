@@ -1,6 +1,9 @@
 package at.tugraz.software22.ui.activity;
 
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
@@ -115,7 +118,8 @@ public class MainActivityTest{
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
                 .perform(ViewActions.click());
 
-        Intents.intended(IntentMatchers.hasComponent(MainActivity.class.getName()));
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, null);
+        Intents.intending(IntentMatchers.hasComponent(MainActivity.class.getName())).respondWith(result);
         Intents.release();
     }
 
