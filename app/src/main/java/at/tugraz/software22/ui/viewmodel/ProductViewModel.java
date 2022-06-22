@@ -75,5 +75,4 @@ public class ProductViewModel extends AndroidViewModel {
             this.orderLiveData.postValue(products);
         });
     }
-    //If create-function needed, implement here createOrder()
 }
