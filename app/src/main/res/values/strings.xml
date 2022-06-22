@@ -28,17 +28,17 @@
     <string name="default_firstname">Max</string>
     <string name="title_firstname">Firstname:</string>
     <string name="edit_user">Edit User</string>
-    <string name="todo">TODO</string>
-    <string name="edit_product_name">Product Name</string>
-    <string name="default_product">XBOX</string>
-    <string name="edit_estimated_time">Estimated Time</string>
-    <string name="edit_location">Location</string>
-    <string name="edit_quantity">Quantity</string>
-    <string name="default_time">5</string>
-    <string name="default_location">aisle 3</string>
-    <string name="default_quantity">12</string>
-    <string name="create_product">Create Product</string>
-    <string name="edit_product">Edit Product</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="edit_product_name" translatable="false">Product Name</string>
+    <string name="default_product" translatable="false">XBOX</string>
+    <string name="edit_estimated_time" translatable="false">Estimated Time</string>
+    <string name="edit_location" translatable="false">Location</string>
+    <string name="edit_quantity" translatable="false">Quantity</string>
+    <string name="default_time" translatable="false">5</string>
+    <string name="default_location" translatable="false">aisle 3</string>
+    <string name="default_quantity" translatable="false">12</string>
+    <string name="create_product" translatable="false">Create Product</string>
+    <string name="edit_product" translatable="false">Edit Product</string>
     <string name="scan_product">Scan product</string>
     <string name="no_camera_permission">You need the camera permission to be able to use this app!</string>
     <string name="scan_invalid_id">Invalid product id!</string>

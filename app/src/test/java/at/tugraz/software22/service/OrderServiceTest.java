@@ -153,5 +153,4 @@ public class OrderServiceTest {
 //        orderService.changeStateOfProductInOrder(1,1, "started");
 //        Assert.assertEquals(Statuses.STARTED, actualOrders.get(0).getAllOrders_().get(0).getStatus());
 //    }
-
 }
