@@ -62,8 +62,8 @@ public class ReportTest {
         expectedList.add(o1);
         expectedList.add(o2);
 
-        LocalDateTime startDate = LocalDateTime.of(2022, 6, 1, 0, 0, 0);
-        LocalDateTime endDate = LocalDateTime.of(2022, 6, 30, 0, 0, 0);
+        LocalDate startDate = LocalDate.of(2022, 6, 1);
+        LocalDate endDate = LocalDate.of(2022, 6, 30);
 
         List<Order> actualOrders = orderService.getOrdersFromTimeframe(startDate, endDate);
 
@@ -74,8 +74,8 @@ public class ReportTest {
     public void givenTimeFrameWithoutOrders_whenGetOrders_deliverNoOrders() {
         List<Order> expectedList = new ArrayList<Order>();
 
-        LocalDateTime startDate = LocalDateTime.of(1990, 6, 1, 0, 0, 0);
-        LocalDateTime endDate = LocalDateTime.of(1990, 6, 30, 0, 0, 0);
+        LocalDate startDate = LocalDate.of(1990, 6, 1);
+        LocalDate endDate = LocalDate.of(1990, 6, 30);
 
         List<Order> actualOrders = orderService.getOrdersFromTimeframe(startDate, endDate);
 

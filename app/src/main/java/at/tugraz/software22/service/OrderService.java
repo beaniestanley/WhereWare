@@ -1,5 +1,6 @@
 package at.tugraz.software22.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class OrderService {
         orderRepository.addOrder(order);
     }
 
-    public List<Order> getOrdersFromTimeframe(LocalDateTime startDate, LocalDateTime endDate)
+    public List<Order> getOrdersFromTimeframe(LocalDate startDate, LocalDate endDate)
     {
         List<Order> allOrders = getAll();
 
@@ -35,7 +36,10 @@ public class OrderService {
 
         for(Order order_to_test : allOrders)
         {
-            if (order_to_test.getStartTime().isAfter(startDate) && order_to_test.getEndTime().isBefore(endDate))
+            if(order_to_test.getStartTime() == null || order_to_test.getEndTime() == null)
+                continue;
+
+            if (order_to_test.getStartTime().isAfter(startDate.atStartOfDay()) && order_to_test.getEndTime().isBefore(endDate.atStartOfDay()))
             {
                 validOrders.add(order_to_test);
             }

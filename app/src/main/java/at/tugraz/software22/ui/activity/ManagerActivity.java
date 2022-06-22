@@ -3,14 +3,17 @@ package at.tugraz.software22.ui.activity;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,8 +29,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import at.tugraz.software22.R;
+import at.tugraz.software22.WhereWareApplication;
+import at.tugraz.software22.domain.Order;
+import at.tugraz.software22.service.OrderService;
 
 public class ManagerActivity extends AppCompatActivity {
 
@@ -87,12 +94,12 @@ public class ManagerActivity extends AppCompatActivity {
                 }
 
                 if(bothDatesValid)
-                    generatePDF();
+                    generatePDF(startDate, endDate);
             }
         });
     }
 
-    private void generatePDF() {
+    private void generatePDF(LocalDate startDate, LocalDate endDate) {
 
         if (checkPermission()) {
             Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
@@ -113,6 +120,15 @@ public class ManagerActivity extends AppCompatActivity {
         // in which we will be passing our pageWidth,
         // pageHeight and number of pages and after that
         // we are calling it to create our PDF.
+
+        WhereWareApplication whereWareApplication = (WhereWareApplication) getApplication();
+        OrderService orderService = whereWareApplication.getOrderService();
+        List<Order> allOrders = orderService.getOrdersFromTimeframe(startDate, endDate);
+
+        int pageExcessing = allOrders.size() - 66;
+        if(pageExcessing > 0)
+            pageHeight += pageExcessing * 15;
+
         PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
 
         // below line is used for setting
@@ -139,7 +155,7 @@ public class ManagerActivity extends AppCompatActivity {
         // the first parameter is our text, second parameter
         // is position from start, third parameter is position from top
         // and then we are passing our variable of paint which is title.
-        canvas.drawText("Report", 209, 100, title);
+        canvas.drawText("Report", 50, 50, title);
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
@@ -150,6 +166,32 @@ public class ManagerActivity extends AppCompatActivity {
         // below line is used for setting
         // our text to center of PDF.
         title.setTextAlign(Paint.Align.CENTER);
+
+        Paint tableText = new Paint();
+        tableText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        tableText.setColor(ContextCompat.getColor(this, R.color.black));
+        tableText.setTextSize(10);
+
+        int verticalStart = 100;
+        canvas.drawText("ID", 50, verticalStart, tableText);
+        canvas.drawText("Employee", 80, verticalStart, tableText);
+        canvas.drawText("Qt.", 180, verticalStart, tableText);
+        canvas.drawText("Start Time", 200, verticalStart, tableText);
+        canvas.drawText("End Time", 350, verticalStart, tableText);
+        canvas.drawText("Collection Time [min]", 500, verticalStart, tableText);
+        verticalStart += 15;
+
+        tableText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+
+        for (Order o: allOrders) {
+            canvas.drawText(o.getId().toString(), 50, verticalStart, tableText);
+            canvas.drawText("name", 80, verticalStart, tableText);
+            canvas.drawText(o.getProductQuantity_().toString(), 180, verticalStart, tableText);
+            canvas.drawText(o.getStartTime().toString(), 200, verticalStart, tableText);
+            canvas.drawText(o.getEndTime().toString(), 350, verticalStart, tableText);
+            canvas.drawText(Long.toString(o.getCollectionTime().toMinutes()), 500, verticalStart, tableText);
+            verticalStart += 15;
+        }
 
         // after adding all attributes to our
         // PDF file we will be finishing our page.
@@ -176,6 +218,21 @@ public class ManagerActivity extends AppCompatActivity {
         // after storing our pdf to that
         // location we are closing our PDF file.
         pdfDocument.close();
+
+        Uri filename= Uri.parse("storage/self/primary/Documents/GFG.pdf");
+        String mimeType =  MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(file.toString()));
+
+        try {
+            Intent i;
+            i = new Intent(Intent.ACTION_VIEW);
+            i.setDataAndType(filename,mimeType);
+            startActivity(i);
+
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this,
+                    "No Application Available to view this file type",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean checkPermission() {
@@ -202,7 +259,7 @@ public class ManagerActivity extends AppCompatActivity {
                 boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
                 if (writeStorage && readStorage) {
-                    Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Permission Denined.", Toast.LENGTH_SHORT).show();
                     finish();
