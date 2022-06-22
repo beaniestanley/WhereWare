@@ -153,7 +153,7 @@ public class ManagerOrderActivityTest {
         double average_collection_time = (order1.getCollectionTime().toMinutes()
                 + order2.getCollectionTime().toMinutes()) / 2.0f;
         String expected_average_collection_time = "Average collection time: "
-                + average_collection_time + " minutes";
+                + String.format("%.2f", average_collection_time) + " minutes";
 
         Mockito.when(orderServiceMock.getAll()).thenReturn(expectedOrders);
 

@@ -54,6 +54,7 @@ public class ManagerActivity extends AppCompatActivity {
         Button buttonManageReports = findViewById(R.id.buttonManageReports);
         EditText editTextStartDatePicker = findViewById(R.id.start_date_picker);
         EditText editTextEndDatePicker = findViewById(R.id.end_date_picker);
+        Button buttonLogout = findViewById(R.id.buttonLogoutManager);
 
         buttonManageOrders.setOnClickListener(l -> {
             Intent intent = new Intent(getApplicationContext(), ManagerOrderActivity.class);
@@ -63,6 +64,10 @@ public class ManagerActivity extends AppCompatActivity {
         buttonManageEmployees.setOnClickListener(l -> {
             Intent intent = new Intent(getApplicationContext(), UserActivity.class);
             startActivity(intent);
+        });
+
+        buttonLogout.setOnClickListener(l -> {
+            finish();
         });
 
         buttonManageReports.setOnClickListener(l -> {

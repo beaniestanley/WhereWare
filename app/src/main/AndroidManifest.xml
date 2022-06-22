@@ -5,9 +5,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
-        android:name="at.tugraz.software22.WhereWareApplication"
+        android:name=".WhereWareApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
@@ -16,13 +21,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject">
         <activity
+            android:name=".ui.activity.CameraScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ManagerOrderActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ManagerActivity"
             android:exported="false" />
         <activity
-            android:name="at.tugraz.software22.ui.activity.UserActivity"
+            android:name=".ui.activity.UserActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ProductActivity"
@@ -46,6 +54,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.UserViewActivity" />
+        <activity android:name=".ui.activity.MapActivity" />
     </application>
 
 </manifest>

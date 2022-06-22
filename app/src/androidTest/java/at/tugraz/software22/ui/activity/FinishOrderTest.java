@@ -36,7 +36,7 @@ public class FinishOrderTest{
     public void EspressoTest_whenActivityStarted_verifyInputFieldsExist() {
         ActivityScenario.launch(OrderActivity.class);
         Espresso.onData(anything()).inAdapterView(withId(R.id.allOrders)).atPosition(0).perform(click());
-        Espresso.onView(withId(R.id.finish_button)).perform(click());
+        Espresso.onView(withText("FINISH ORDER")).perform(click());
 
         Espresso.onView(withId(R.id.allOrders))
                 .check(matches(not(hasDescendant(withText("Order 1")))));

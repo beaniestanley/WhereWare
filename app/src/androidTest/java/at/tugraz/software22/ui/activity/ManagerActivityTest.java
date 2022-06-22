@@ -1,6 +1,9 @@
 package at.tugraz.software22.ui.activity;
 
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.res.Resources;
 
 import static android.app.PendingIntent.getActivity;
 import static android.service.autofill.Validators.not;
@@ -26,8 +29,9 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import org.hamcrest.Matcher;
+import org.junit.After;
 import org.junit.Before;
+import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +59,19 @@ public class ManagerActivityTest {
     @Before
     public void setUp() {
         resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
+    }
+
+    @Before
+    public void prepare()
+    {
+        resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
+        Intents.init();
+    }
+
+    @After
+    public void cleanup()
+    {
+        Intents.release();
     }
 
     @Test
@@ -85,7 +102,6 @@ public class ManagerActivityTest {
 
     @Test
     public void whenManageOrdersPressed_thenVerifyThatActivityGetsSwitched() {
-        Intents.init();
         String expected_btn = "Manage Orders";
 
         ActivityScenario.launch(ManagerActivity.class);
@@ -95,7 +111,30 @@ public class ManagerActivityTest {
                 .perform(ViewActions.click());
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
-        Intents.release();
+    }
+
+    @Test
+    public void givenManagerActivity_whenActivityStarted_thenVerifyThatLogoutButtonIsDisplayed() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(ManagerActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenManagerActivity_whenLogoutButtonIsPressed_thenVerifyThatActivitySwitchesToMainActivity() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(ManagerActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, null);
+        Intents.intending(IntentMatchers.hasComponent(MainActivity.class.getName())).respondWith(result);
     }
 
     @Test
