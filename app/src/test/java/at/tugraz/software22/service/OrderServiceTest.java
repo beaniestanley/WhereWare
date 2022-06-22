@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,9 +71,49 @@ public class OrderServiceTest {
     }
 
     @Test
+    public void givenProduct_whenRemoveProduct_thenVerifyRemoveGetsCalled() {
+        Integer expectedQuantity = 4;
+        Integer expectedTime = 2;
+        String expectedName = "Ipad";
+        String expectedLocation = "Aisle 3";
+
+        orderService.addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        orderService.removeProduct(1);
+
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).deleteProduct(1);
+
+    }
+
+    @Test
+    public void givenRepositoryWithOneProduct_whenGetProduct_thenReturnListWithOneProduct() {
+        List<Product> expectedProducts = Collections.singletonList(new Product(3, 7, "Basketball", "aisle 5", 1));
+        Mockito.when(orderRepositoryMock.getProducts()).thenReturn(expectedProducts);
+
+        List<Product> actualProducts = orderService.getProducts();
+        Assert.assertEquals(1, actualProducts.size());
+    }
+
+    @Test
+    public void givenProduct_whenAddProduct_thenVerifyAddGetsCalled() {
+        orderService.addProduct("Toy", 1, "aisle 1", 2);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct("Toy", 1, "aisle 1", 2);
+    }
+
+    @Test
+    public void givenProduct_whenUpdateProduct_thenVerifyUpdateGetsCalled() {
+        orderService.addProduct("Basketball", 3, "aisle 5", 7);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct("Basketball", 3, "aisle 5", 7);
+        orderService.updateProduct(1,"Football", 3, "aisle 5", 7);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).updateProduct(1,"Football", 3, "aisle 5", 7);
+    }
+
+    @Test
     public void givenRepositoryWithOneOrder_whenStateChangedOfProduct_thenReturnOneOrderWithCorrectState() {
-        List<Order> expectedOrders = Arrays.asList(new Order( 1,
-                Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
+        List<Order> expectedOrders = List.of(new Order( 1,
+                List.of(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
         Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
         orderService.tickProduct(1,1);
         List<Order> actualOrders = orderService.getAll();
@@ -84,5 +123,35 @@ public class OrderServiceTest {
 
     }
 
+    //TODO afterwards for changing the status of products and orders :)
+//    @Test
+//    public void givenRepositoryWithOneOrder_whenStateChanged_thenReturnOneOrder() {
+//        List<Order> expectedOrders = Arrays.asList(new Order(1, 1, Collections.emptyList(), 1));
+//        Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
+//        orderService.changeStateOfOrder(1, "finished");
+//        List<Order> actualOrders = orderService.getAll();
+//        Assert.assertEquals(Statuses.FINISHED, actualOrders.get(0).getStatus());
+//
+//        orderService.changeStateOfOrder(1, "pending");
+//        Assert.assertEquals(Statuses.PENDING, actualOrders.get(0).getStatus());
+//
+//        orderService.changeStateOfOrder(1, "started");
+//        Assert.assertEquals(Statuses.STARTED, actualOrders.get(0).getStatus());
+//    }
+//    @Test
+//    public void givenRepositoryWithOneOrder_whenStateChangedOfProduct_thenReturnOneOrderWithCorrectState() {
+//        List<Order> expectedOrders = Arrays.asList(new Order(1, 1,
+//                Arrays.asList(new Product(1, 1, "Xbox One", "Aisle 3", 1)), 1));
+//        Mockito.when(orderRepositoryMock.getAll()).thenReturn(expectedOrders);
+//        orderService.changeStateOfProductInOrder(1,1, "finished");
+//        List<Order> actualOrders = orderService.getAll();
+//        Assert.assertEquals(Statuses.FINISHED, actualOrders.get(0).getAllOrders_().get(0).getStatus());
+//
+//        orderService.changeStateOfProductInOrder(1,1, "pending");
+//        Assert.assertEquals(Statuses.PENDING, actualOrders.get(0).getAllOrders_().get(0).getStatus());
+//
+//        orderService.changeStateOfProductInOrder(1,1, "started");
+//        Assert.assertEquals(Statuses.STARTED, actualOrders.get(0).getAllOrders_().get(0).getStatus());
+//    }
 
 }
