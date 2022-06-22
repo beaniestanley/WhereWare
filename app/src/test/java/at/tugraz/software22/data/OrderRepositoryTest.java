@@ -34,12 +34,12 @@ public class OrderRepositoryTest{
         Product secondProduct = new Product(100, 2, "Xbox Controller", "Aisle 2",2);
         Product thirdProduct = new Product(50, 1, "Xbox HDMI Adapter", "Aisle 3",3);
         Product fourthProduct = new Product(250, 1, "Nintendo Switch", "Aisle 1",4);
-        Product fithProduct = new Product(350, 2, "PS4 PRO", "Aisle 2",5);
+        Product fifthProduct = new Product(350, 2, "PS4 PRO", "Aisle 2",5);
         Product sixthProduct = new Product(150, 1, "PS5 SLIM", "Aisle 1",6);
 
         List<Product> productsOrderOne = new ArrayList<>(Arrays.asList(firstProduct, secondProduct, thirdProduct));
-        List<Product> productsOrderTwo = new ArrayList<>(Arrays.asList(fithProduct, firstProduct, sixthProduct));
-        List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fithProduct, fourthProduct, sixthProduct));
+        List<Product> productsOrderTwo = new ArrayList<>(Arrays.asList(fifthProduct, firstProduct, sixthProduct));
+        List<Product> productsOrderThree = new ArrayList<>(Arrays.asList(fifthProduct, fourthProduct, sixthProduct));
 
         Order expectedFirstOrder = new Order(4,  productsOrderOne, 1);
         Order expectedSecondOrder = new Order(4, productsOrderTwo, 2);
@@ -62,5 +62,65 @@ public class OrderRepositoryTest{
         Assert.assertEquals(expectedThirdOrder.getStatus(), ordersActual.get(2).getStatus());
         Assert.assertEquals(expectedThirdOrder.getAllProducts_().size(), ordersActual.get(2).getAllProducts_().size());
 
+    }
+
+    @Test
+    public void  givenRepositoryWithDefaultSize_whenGetProduct_thenReturnListWithDefaultSize() {
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
+
+        List<Product> actualProducts = dummyOrderRepository.getProducts();
+
+        int defaultSize = 6;
+        Assert.assertEquals(defaultSize, actualProducts.size());
+    }
+
+    @Test
+    public void givenRepositoryWithDefaultSize_whenAddProduct_thenReturnProductListWithSizeSeven() {
+        String expectedName = "Charger";
+        Integer expectedQuantity = 9;
+        String expectedLocation = "aisle 6";
+        Integer expectedTime = 3;
+
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
+
+        dummyOrderRepository.addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        List<Product> actualProducts = dummyOrderRepository.getProducts();
+
+        int expectedSize = 7;
+        Assert.assertEquals(expectedSize, actualProducts.size());
+    }
+
+    @Test
+    public void givenRepositoryWithDefaultSize_whenDeleteProduct_thenReturnProductListWithSizeFive() {
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
+
+        dummyOrderRepository.deleteProduct(1);
+
+        List<Product> actualProducts = dummyOrderRepository.getProducts();
+
+        int expectedSize = 5;
+        Assert.assertEquals(expectedSize, actualProducts.size());
+    }
+
+    @Test
+    public void givenRepositoryWithDefaultSize_whenUpdated_thenReturnUpdatedList() {
+        String expectedName = "Shirt";
+        String expectedLocation = "aisle 1";
+        Integer expectedQuantity = 70;
+        Integer expectedTime = 1;
+
+        DummyOrderRepository dummyOrderRepository = new DummyOrderRepository();
+
+        dummyOrderRepository.addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        String updatedName = "T-Shirt";
+        dummyOrderRepository.updateProduct(7, updatedName, expectedTime, expectedLocation, expectedQuantity);
+
+        List<Product> actualProduct = dummyOrderRepository.getProducts();
+
+        int expectedSize = 7;
+        Assert.assertEquals(expectedSize, actualProduct.size());
+        Assert.assertEquals(updatedName, actualProduct.get(6).getName());
     }
 }
