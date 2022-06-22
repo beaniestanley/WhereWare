@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">WhereWare</string>
-    <string name="intro">In contrast to the individual developer assignment, there is no given framework for the team project. You are free to customize the project according to your needs.</string>
-    <string name="final_app">We are looking forward to your final app!</string>
+    <string name="app_name" translatable="false">WhereWare</string>
     <string name="product_name">Product</string>
     <string name="product_estimatedtime">Estimated Time: %1$d</string>
     <string name="product_quantity">Quantity: %1$d</string>
@@ -16,17 +14,17 @@
     <string name="hi_manager_what_would_you_like_to_do_today">Hi Manager, what would you like to do today?</string>
     <string name="manage_employees">Manage Employees</string>
     <string name="filter_orders">Filter Orders</string>
-    <string name="admin">admin</string>
-    <string name="employee">employee</string>
+    <string name="admin" translatable="false">admin</string>
+    <string name="employee" translatable="false">employee</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="login_button">Login</string>
     <string name="invalid_login">Invalid Login. You are not wanted here!</string>
     <string name="user_name_text">Name : %1$s %2$s</string>
     <string name="text_collection_time">Collection Time: PlaceHolder</string>
     <string name="create_user_text">Create User</string>
     <string name="default_lastname">Mustermann</string>
-    <string name="title_lastname">Lastname :</string>
+    <string name="title_lastname">Lastname:</string>
     <string name="default_firstname">Max</string>
     <string name="title_firstname">Firstname:</string>
     <string name="edit_user">Edit User</string>
@@ -34,5 +32,11 @@
     <string name="no_camera_permission">You need the camera permission to be able to use this app!</string>
     <string name="scan_invalid_id">Invalid product id!</string>
     <string name="camera_not_working">Camera does not work!</string>
+    <string name="login_title">Login</string>
+    <string name="managerOrderActivityShowingOrders">Showing %1$d completed orders for %2$s</string>
+    <string name="managerOrderActivityAvgTime">Average collection time: %1$.2f minutes</string>
+    <string name="finishOrderButton">Finish order</string>
+    <string name="language_de">German</string>
+    <string name="language_en">English</string>
     <string name="logout_button">Log out</string>
 </resources>

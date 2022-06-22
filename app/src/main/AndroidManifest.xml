@@ -50,6 +50,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.UserViewActivity" />
+        <activity android:name=".ui.activity.MapActivity" />
     </application>
 
 </manifest>

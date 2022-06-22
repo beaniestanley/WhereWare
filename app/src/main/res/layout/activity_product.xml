@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.ProductActivity"
-    android:id="@+id/activityProductScreen">
+    android:id="@+id/activityProductScreen"
+    android:descendantFocusability="blocksDescendants">
 
     <ListView
         android:id="@+id/listView_productList"
@@ -15,7 +16,10 @@
         app:layout_constraintBottom_toTopOf="@+id/finish_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="false"
+        android:clickable="false"
+        >
 
     </ListView>
 
@@ -30,14 +34,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/finish_button" />
+        app:layout_constraintTop_toBottomOf="@+id/finish_button"
+        android:focusable="false"/>
 
     <Button
         android:id="@+id/finish_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
-        android:text="Finish"
+        android:text="@string/finishOrderButton"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/scanProductbtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listView_productList"
         app:strokeColor="#000000"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="1dp"
+        android:focusable="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
