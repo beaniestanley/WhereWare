@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,6 +67,46 @@ public class OrderServiceTest {
         Assert.assertEquals(expectedTime, actualOrders.get(0).getAllProducts_().get(0).getEstimatedTime());
         Assert.assertEquals(expectedName, actualOrders.get(0).getAllProducts_().get(0).getName());
         Assert.assertEquals(expectedLocation, actualOrders.get(0).getAllProducts_().get(0).getLocation());
+    }
+
+    @Test
+    public void givenProduct_whenRemoveProduct_thenVerifyRemoveGetsCalled() {
+        Integer expectedQuantity = 4;
+        Integer expectedTime = 2;
+        String expectedName = "Ipad";
+        String expectedLocation = "Aisle 3";
+
+        orderService.addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct(expectedName, expectedTime, expectedLocation, expectedQuantity);
+
+        orderService.removeProduct(1);
+
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).deleteProduct(1);
+
+    }
+
+    @Test
+    public void givenRepositoryWithOneProduct_whenGetProduct_thenReturnListWithOneProduct() {
+        List<Product> expectedProducts = Collections.singletonList(new Product(3, 7, "Basketball", "aisle 5", 1));
+        Mockito.when(orderRepositoryMock.getProducts()).thenReturn(expectedProducts);
+
+        List<Product> actualProducts = orderService.getProducts();
+        Assert.assertEquals(1, actualProducts.size());
+    }
+
+    @Test
+    public void givenProduct_whenAddProduct_thenVerifyAddGetsCalled() {
+        orderService.addProduct("Toy", 1, "aisle 1", 2);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct("Toy", 1, "aisle 1", 2);
+    }
+
+    @Test
+    public void givenProduct_whenUpdateProduct_thenVerifyUpdateGetsCalled() {
+        orderService.addProduct("Basketball", 3, "aisle 5", 7);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).addProduct("Basketball", 3, "aisle 5", 7);
+        orderService.updateProduct(1,"Football", 3, "aisle 5", 7);
+        Mockito.verify(orderRepositoryMock, Mockito.times(1)).updateProduct(1,"Football", 3, "aisle 5", 7);
     }
 
     //TODO afterwards for changing the status of products and orders :)
