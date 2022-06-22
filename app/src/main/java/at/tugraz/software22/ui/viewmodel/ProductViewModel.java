@@ -40,11 +40,40 @@ public class ProductViewModel extends AndroidViewModel {
         });
     }
 
+    public void loadProductData() {
+        executor.execute(() -> {
+            List<Product> products = orderService.getProducts();
+            orderLiveData.postValue(products);
+        });
+    }
+
     public Order getOrder(int order_id)
     {
         return orderService.getOrder(order_id);
     }
 
+    public void removeProduct(Integer id) {
+        executor.execute(() -> {
+            orderService.removeProduct(id);
+            List<Product> products = orderService.getProducts();
+            this.orderLiveData.postValue(products);
+        });
+    }
 
+    public void createProduct(String product_name, Integer estimated_time, String location, Integer quantity) {
+        executor.execute(() -> {
+            orderService.addProduct(product_name, estimated_time, location, quantity);
+            List<Product> products = orderService.getProducts();
+            this.orderLiveData.postValue(products);
+        });
+    }
+
+    public void updateProduct(Integer id, String product_name, Integer estimated_time, String location, Integer quantity) {
+        executor.execute(() -> {
+            orderService.updateProduct(id, product_name, estimated_time, location, quantity);
+            List<Product> products = orderService.getProducts();
+            this.orderLiveData.postValue(products);
+        });
+    }
     //If create-function needed, implement here createOrder()
 }
