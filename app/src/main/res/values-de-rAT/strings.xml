@@ -36,4 +36,5 @@
     <string name="finishOrderButton">Bestellung abschließen</string>
     <string name="language_de">Deutsch</string>
     <string name="language_en">Englisch</string>
+    <string name="logout_button">Ausloggen</string>
 </resources>

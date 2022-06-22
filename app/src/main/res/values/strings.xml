@@ -38,4 +38,5 @@
     <string name="finishOrderButton">Finish order</string>
     <string name="language_de">German</string>
     <string name="language_en">English</string>
+    <string name="logout_button">Log out</string>
 </resources>

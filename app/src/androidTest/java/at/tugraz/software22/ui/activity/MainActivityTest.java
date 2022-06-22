@@ -1,17 +1,16 @@
 package at.tugraz.software22.ui.activity;
 
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -129,6 +128,32 @@ public class MainActivityTest{
 
         Espresso.onView(ViewMatchers.withText("Anmelden"))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenOrderActivity_whenActivityStarted_thenVerifyThatLogoutButtonIsDisplayed() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(OrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenOrderActivity_whenLogoutButtonIsPressed_thenVerifyThatActivitySwitchesToMainActivity() {
+        Intents.init();
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(OrderActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, null);
+        Intents.intending(IntentMatchers.hasComponent(MainActivity.class.getName())).respondWith(result);
+        Intents.release();
     }
 
 }

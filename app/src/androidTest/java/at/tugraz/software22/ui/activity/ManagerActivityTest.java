@@ -1,6 +1,9 @@
 package at.tugraz.software22.ui.activity;
 
 
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
@@ -10,6 +13,7 @@ import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,11 +24,14 @@ import org.mockito.Mockito;
 
 import java.util.concurrent.Executor;
 
+import at.tugraz.software22.R;
 import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.service.OrderService;
 
 @RunWith(AndroidJUnit4.class)
 public class ManagerActivityTest {
+
+    private Resources resources;
 
     @BeforeClass
     public static void beforeClass() {
@@ -38,6 +45,7 @@ public class ManagerActivityTest {
     @Before
     public void prepare()
     {
+        resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
         Intents.init();
     }
 
@@ -84,6 +92,30 @@ public class ManagerActivityTest {
                 .perform(ViewActions.click());
 
         Intents.intended(IntentMatchers.hasComponent(ManagerOrderActivity.class.getName()));
+    }
+
+    @Test
+    public void givenManagerActivity_whenActivityStarted_thenVerifyThatLogoutButtonIsDisplayed() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(ManagerActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void givenManagerActivity_whenLogoutButtonIsPressed_thenVerifyThatActivitySwitchesToMainActivity() {
+        String expectedButton = resources.getString(R.string.logout_button);
+
+        ActivityScenario.launch(ManagerActivity.class);
+
+        Espresso.onView(ViewMatchers.withText(expectedButton))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(Activity.RESULT_OK, null);
+        Intents.intending(IntentMatchers.hasComponent(MainActivity.class.getName())).respondWith(result);
     }
 
 }
