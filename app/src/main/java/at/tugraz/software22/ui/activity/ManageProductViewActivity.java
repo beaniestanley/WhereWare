@@ -18,9 +18,7 @@ public class ManageProductViewActivity extends AppCompatActivity {
     public static final String INTENT_RESULT_QUANTITY = "quantity";
     public static final String INTENT_RESULT_DELETE_PRODUCT = "deleteProduct";
     public static final String INTENT_RESULT_PRODUCT_ID = "product_id";
-    public static final String INTENT_RESULT_ORDER_ID = "order_id";
-    Integer UPDATE_PRODUCT = 3;
-    Integer DELETE_PRODUCT = 4;
+
     Product currentProduct = null;
 
     @Override
@@ -54,7 +52,7 @@ public class ManageProductViewActivity extends AppCompatActivity {
             finish();
         });
         createButton.setOnClickListener(event -> {
-            Boolean shouldReturn = false;
+            boolean shouldReturn = false;
             String text_product_name = input_product_name.getText().toString();
             String text_estimated_time = input_estimated_time.getText().toString();
             String text_location = input_location.getText().toString();
