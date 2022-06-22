@@ -4,6 +4,7 @@ import java.util.List;
 
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.OrderRepository;
+import at.tugraz.software22.domain.Product;
 
 public class OrderService {
 
@@ -25,6 +26,18 @@ public class OrderService {
     public void addOrder(Order order) {
         orderRepository.addOrder(order);
     }
+
+    public void removeProduct(Integer id) {
+        orderRepository.deleteProduct(id);
+    }
+
+    public List<Product> getProducts() {return orderRepository.getProducts(); }
+
+    public void addProduct(String product_name, Integer estimated_time, String location, Integer quantity)
+    {orderRepository.addProduct(product_name, estimated_time, location, quantity);}
+
+    public void updateProduct(Integer id, String product_name, Integer estimated_time, String location, Integer quantity)
+    {orderRepository.updateProduct(id, product_name, estimated_time, location, quantity); }
 
     //TODO afterwards could be used for changing status of products
 //    public void changeStateOfOrder(Integer id, String status){
