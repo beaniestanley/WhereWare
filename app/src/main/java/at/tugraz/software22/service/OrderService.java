@@ -28,6 +28,18 @@ public class OrderService {
         orderRepository.addOrder(order);
     }
 
+    public void removeProduct(Integer id) {
+        orderRepository.deleteProduct(id);
+    }
+
+    public List<Product> getProducts() {return orderRepository.getProducts(); }
+
+    public void addProduct(String product_name, Integer estimated_time, String location, Integer quantity)
+    {orderRepository.addProduct(product_name, estimated_time, location, quantity);}
+
+    public void updateProduct(Integer id, String product_name, Integer estimated_time, String location, Integer quantity)
+    {orderRepository.updateProduct(id, product_name, estimated_time, location, quantity); }
+
     public boolean tickProduct(int order_id, int productId) {
 
         Order o = null;
