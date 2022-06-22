@@ -1,10 +1,8 @@
 package at.tugraz.software22.ui.activity;
 
 
-
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.content.Intent;
 import android.content.res.Resources;
 
 import androidx.test.core.app.ActivityScenario;
@@ -18,7 +16,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
