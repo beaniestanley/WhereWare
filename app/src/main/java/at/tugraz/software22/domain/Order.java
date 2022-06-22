@@ -3,13 +3,12 @@ package at.tugraz.software22.domain;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private final Integer id_;
-    List<Product> allOrders_ = new ArrayList<>();
+    List<Product> allProducts = new ArrayList<>();
     Integer productQuantity_ = 0;
     Integer estimatedTime_ = 0;
     LocalDateTime startTime;
@@ -23,13 +22,13 @@ public class Order {
     public Order(Integer productQuantity, List<Product> products, Integer id){
         id_ = id;
         productQuantity_ = productQuantity;
-        allOrders_ = products;
+        allProducts = products;
         estimatedTime_ = 0;
-        for (Product product: allOrders_) estimatedTime_ += product.getEstimatedTime();
+        for (Product product: allProducts) estimatedTime_ += product.getEstimatedTime();
     }
 
     public List<Product> getAllProducts_() {
-        return allOrders_;
+        return allProducts;
     }
 
     public Integer getProductQuantity_() {
@@ -77,7 +76,7 @@ public class Order {
     }
 
     public void addProduct(Product product) {
-        allOrders_.add(product);
+        allProducts.add(product);
         estimatedTime_ += product.getEstimatedTime();
     }
 

@@ -129,7 +129,7 @@ public class ManagerActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.end_date_picker)).perform(ViewActions.replaceText("01.01.2050"));
         Espresso.onView(ViewMatchers.withId(R.id.buttonManageReports)).perform(ViewActions.click());
 
-        File file = new File("storage/self/primary/Documents/GFG.pdf");
+        File file = new File("storage/self/primary/Documents/Report.pdf");
         assertTrue(file.exists());
     }
 

@@ -35,6 +35,7 @@ import at.tugraz.software22.R;
 import at.tugraz.software22.WhereWareApplication;
 import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.service.OrderService;
+import at.tugraz.software22.service.UserService;
 
 public class ManagerActivity extends AppCompatActivity {
 
@@ -123,6 +124,7 @@ public class ManagerActivity extends AppCompatActivity {
 
         WhereWareApplication whereWareApplication = (WhereWareApplication) getApplication();
         OrderService orderService = whereWareApplication.getOrderService();
+        UserService userService = whereWareApplication.getUserService();
         List<Order> allOrders = orderService.getOrdersFromTimeframe(startDate, endDate);
 
         int pageExcessing = allOrders.size() - 66;
@@ -139,39 +141,18 @@ public class ManagerActivity extends AppCompatActivity {
         // from our page of PDF.
         Canvas canvas = myPage.getCanvas();
 
-        // below line is used for adding typeface for
-        // our text which we will be adding in our PDF file.
+        //Draw Title
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-
-        // below line is used for setting text size
-        // which we will be displaying in our PDF file.
         title.setTextSize(15);
-
-        // below line is sued for setting color
-        // of our text inside our PDF file.
         title.setColor(ContextCompat.getColor(this, R.color.black));
-
-        // below line is used to draw text in our PDF file.
-        // the first parameter is our text, second parameter
-        // is position from start, third parameter is position from top
-        // and then we are passing our variable of paint which is title.
         canvas.drawText("Report", 50, 50, title);
-
-        // similarly we are creating another text and in this
-        // we are aligning this text to center of our PDF file.
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        title.setColor(ContextCompat.getColor(this, R.color.purple_200));
-        title.setTextSize(15);
-
-        // below line is used for setting
-        // our text to center of PDF.
-        title.setTextAlign(Paint.Align.CENTER);
 
         Paint tableText = new Paint();
         tableText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         tableText.setColor(ContextCompat.getColor(this, R.color.black));
         tableText.setTextSize(10);
 
+        //Draw Headers
         int verticalStart = 100;
         canvas.drawText("ID", 50, verticalStart, tableText);
         canvas.drawText("Employee", 80, verticalStart, tableText);
@@ -183,9 +164,10 @@ public class ManagerActivity extends AppCompatActivity {
 
         tableText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
 
+        //Draw Orders
         for (Order o: allOrders) {
             canvas.drawText(o.getId().toString(), 50, verticalStart, tableText);
-            canvas.drawText("name", 80, verticalStart, tableText);
+            canvas.drawText(userService.getUserStringForOrder(o), 80, verticalStart, tableText);
             canvas.drawText(o.getProductQuantity_().toString(), 180, verticalStart, tableText);
             canvas.drawText(o.getStartTime().toString(), 200, verticalStart, tableText);
             canvas.drawText(o.getEndTime().toString(), 350, verticalStart, tableText);
@@ -193,13 +175,9 @@ public class ManagerActivity extends AppCompatActivity {
             verticalStart += 15;
         }
 
-        // after adding all attributes to our
-        // PDF file we will be finishing our page.
+        //Finish
         pdfDocument.finishPage(myPage);
-
-        // below line is used to set the name of
-        // our PDF file and its path.
-        File file = new File("storage/self/primary/Documents/GFG.pdf");
+        File file = new File("storage/self/primary/Documents/Report.pdf");
 
         try {
             // after creating a file name we will
@@ -219,7 +197,7 @@ public class ManagerActivity extends AppCompatActivity {
         // location we are closing our PDF file.
         pdfDocument.close();
 
-        Uri filename= Uri.parse("storage/self/primary/Documents/GFG.pdf");
+        Uri filename= Uri.parse("storage/self/primary/Documents/Report.pdf");
         String mimeType =  MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(file.toString()));
 
         try {

@@ -2,6 +2,7 @@ package at.tugraz.software22.service;
 
 import java.util.List;
 
+import at.tugraz.software22.domain.Order;
 import at.tugraz.software22.domain.User;
 import at.tugraz.software22.domain.UserRepository;
 
@@ -28,5 +29,17 @@ public class UserService {
 
     public void updateUser(Integer id, String firstName, String lastName) {
         userRepository.updateUser(id, firstName, lastName);
+    }
+
+    public String getUserStringForOrder(Order ord)
+    {
+        for (User usr : getAll())
+        {
+            if (usr.getCompletedOrders().contains(ord))
+            {
+                return usr.getForename() + " " + usr.getLastname();
+            }
+        }
+        return "Max Maier";
     }
 }
