@@ -1,45 +1,55 @@
 package at.tugraz.software22.domain;
 
-public class Product {
+import java.io.Serializable;
 
-    private final Integer id_;
-    Integer estimatedTime_;
-    Integer productQuantity_;
-    String name_;
-    Statuses status_;
-    String location_;
+public class Product implements Serializable {
 
-    public Product(Integer estimatedTime_, Integer productQuantity_, String name_, String location_, Integer id) {
-        id_ = id;
-        this.estimatedTime_ = estimatedTime_;
-        this.productQuantity_ = productQuantity_;
-        this.name_ = name_;
-        this.status_ = Statuses.PENDING;
-        this.location_ = location_;
+    private final Integer id;
+    Integer estimatedTime;
+    Integer productQuantity;
+    String name;
+    Statuses status;
+    String location;
+
+    public Product(Integer estimatedTime, Integer productQuantity, String name, String location, Integer id) {
+        this.id = id;
+        this.estimatedTime = estimatedTime;
+        this.productQuantity = productQuantity;
+        this.name = name;
+        this.status = Statuses.PENDING;
+        this.location = location;
     }
 
     public Integer getEstimatedTime() {
-        return estimatedTime_;
+        return estimatedTime;
     }
 
     public Integer getProductQuantity() {
-        return productQuantity_;
+        return productQuantity;
     }
 
     public String getName() {
-        return name_;
+        return name;
     }
 
     public Statuses getStatus() {
-        return status_;
+        return status;
     }
 
     public String getLocation() {
-        return location_;
+        return location;
     }
 
     public Integer getId() {
-        return id_;
+        return id;
     }
+
+    public void setProductName(String name) {this.name = name; }
+
+    public void setEstimatedTime(Integer estimatedTime) {this.estimatedTime = estimatedTime; }
+
+    public void setProductQuantity(Integer quantity) {productQuantity = quantity; }
+
+    public void setLocation(String location) {this.location = location; }
 
 }
