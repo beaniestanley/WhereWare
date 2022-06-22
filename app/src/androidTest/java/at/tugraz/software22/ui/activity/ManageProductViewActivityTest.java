@@ -10,10 +10,12 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -45,6 +47,13 @@ public class ManageProductViewActivityTest {
     @Before
     public void setUp() {
         resources = InstrumentationRegistry.getInstrumentation().getTargetContext().getResources();
+        Intents.init();
+    }
+
+    @After
+    public void tearDown()
+    {
+        Intents.release();
     }
 
     @Test

@@ -52,7 +52,8 @@ public class ManageProductActivityTest{
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown()
+    {
         Intents.release();
     }
 

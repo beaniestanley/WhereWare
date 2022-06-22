@@ -18,8 +18,8 @@ import at.tugraz.software22.ui.viewmodel.ProductViewModel;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
 
-    private final ProductViewModel productViewModel;
-    private final int orderId;
+    private ProductViewModel productViewModel;
+    private int orderId;
 
     private static class ViewHolder {
         TextView name;
@@ -33,6 +33,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         super(context, R.layout.productlist_item);
         this.productViewModel = productViewModel;
         this.orderId = orderId;
+    }
+    public ProductAdapter(@NonNull Context context)
+    {
+        super(context, R.layout.productlist_item);
     }
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
