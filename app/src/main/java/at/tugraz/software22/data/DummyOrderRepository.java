@@ -70,12 +70,16 @@ public class DummyOrderRepository implements OrderRepository {
         return null;
     }
     @Override
-    public void deleteProduct(Integer id) {
-        for (Product product : products) {
-            if (Objects.equals(product.getId(), id)) {
+    public void deleteProduct(Integer id)
+    {
+        for (Product product : products)
+        {
+            if (Objects.equals(product.getId(), id))
+            {
                 products.remove(product);
 
-                for (Order order : orders){
+                for (Order order : orders)
+                {
                     for (Product prod : order.getAllProducts_())
                     {
                         if (Objects.equals(prod.getId(), id))
@@ -107,8 +111,10 @@ public class DummyOrderRepository implements OrderRepository {
 
     public void updateProduct(Integer id, String product_name, Integer estimated_time, String location, Integer quantity)
     {
-        for (Product product : products) {
-            if (Objects.equals(product.getId(), id)) {
+        for (Product product : products)
+        {
+            if (Objects.equals(product.getId(), id))
+            {
                 product.setProductName(product_name);
                 product.setProductQuantity(quantity);
                 product.setEstimatedTime(estimated_time);
