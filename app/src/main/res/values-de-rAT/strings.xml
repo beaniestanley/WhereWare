@@ -8,7 +8,7 @@
     <string name="order_id">Bestellung %1$d</string>
     <string name="unclosed_orders">Sie haben %1$d Bestellung zu erledigen!</string>
     <string name="collection_time">Sammelzeit: %1$dh %2$dm</string>
-    <string name="manage_reports">Reports verwalten</string>
+    <string name="manage_reports">Bericht erstellen</string>
     <string name="manage_products">Produkte verwalten</string>
     <string name="manage_orders">Bestellungen verwalten</string>
     <string name="hi_manager_what_would_you_like_to_do_today">Hi Manager, was möchten Sie heute erledigen?</string>
@@ -36,4 +36,10 @@
     <string name="finishOrderButton">Bestellung abschließen</string>
     <string name="language_de">Deutsch</string>
     <string name="language_en">Englisch</string>
+    <string name="logout_button">Ausloggen</string>
+    <string name="invalid_date">Ungültiges Datum</string>
+    <string name="invalid_date_in_future">Startdatum ist in der Zukunft</string>
+    <string name="invalid_date_end_before_start">Enddatum ist vor Startdatum</string>
+    <string name="start_date">Startdatum</string>
+    <string name="end_date">Enddatum</string>
 </resources>
