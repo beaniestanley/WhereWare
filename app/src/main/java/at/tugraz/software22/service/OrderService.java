@@ -1,5 +1,8 @@
 package at.tugraz.software22.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import at.tugraz.software22.domain.Order;
@@ -15,7 +18,6 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-
     public List<Order> getAll() {
         return orderRepository.getAll();
     }
@@ -26,6 +28,26 @@ public class OrderService {
 
     public void addOrder(Order order) {
         orderRepository.addOrder(order);
+    }
+
+    public List<Order> getOrdersFromTimeframe(LocalDate startDate, LocalDate endDate)
+    {
+        List<Order> allOrders = getAll();
+
+        List<Order> validOrders = new ArrayList<>();
+
+        for(Order order_to_test : allOrders)
+        {
+            if(order_to_test.getStartTime() == null || order_to_test.getEndTime() == null)
+                continue;
+
+            if (order_to_test.getStartTime().isAfter(startDate.atStartOfDay()) && order_to_test.getEndTime().isBefore(endDate.atStartOfDay()))
+            {
+                validOrders.add(order_to_test);
+            }
+        }
+
+        return  validOrders;
     }
 
     public boolean tickProduct(int order_id, int productId) {
