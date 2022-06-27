@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import at.tugraz.software22.domain.Order;
@@ -12,6 +13,7 @@ import at.tugraz.software22.domain.Product;
 
 public class DummyOrderRepository implements OrderRepository {
     private final List<Order> orders;
+    private final List<Product> products;
 
     public DummyOrderRepository() {
         orders = new ArrayList<>();
@@ -24,6 +26,8 @@ public class DummyOrderRepository implements OrderRepository {
         Product sixthProduct = new Product(150, 1, "PS5 SLIM", "Aisle 1", 6);
 
         List<Integer> value;
+
+        products = new ArrayList<>(Arrays.asList(firstProduct, secondProduct, thirdProduct, fourthProduct, fifthProduct, sixthProduct));
 
         List<Product> productsOrderOne = new ArrayList<>(Arrays.asList(firstProduct, secondProduct, thirdProduct));
         value = getTimeAndQuantity(productsOrderOne);
@@ -56,7 +60,7 @@ public class DummyOrderRepository implements OrderRepository {
     public List<Order> getAll() {
         return orders;
     }
-    
+
     public Order getOrder(int id) {
         for(Order o: orders) {
             if(o.getId() == id) {
@@ -65,8 +69,58 @@ public class DummyOrderRepository implements OrderRepository {
         }
         return null;
     }
+    @Override
+    public void deleteProduct(Integer id)
+    {
+        for (Product product : products)
+        {
+            if (Objects.equals(product.getId(), id))
+            {
+                products.remove(product);
+
+                for (Order order : orders)
+                {
+                    for (Product prod : order.getAllProducts_())
+                    {
+                        if (Objects.equals(prod.getId(), id))
+                        {
+                            order.getAllProducts_().remove(prod);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
 
     public void addOrder(Order order) {
         orders.add(order);
     }
+
+    @Override
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void addProduct(String product_name, Integer estimated_time, String location, Integer quantity)
+    {
+        Product product = new Product(estimated_time, quantity, product_name, location, (products.size() + 1));
+        products.add(product);
+    }
+
+    public void updateProduct(Integer id, String product_name, Integer estimated_time, String location, Integer quantity)
+    {
+        for (Product product : products)
+        {
+            if (Objects.equals(product.getId(), id))
+            {
+                product.setProductName(product_name);
+                product.setProductQuantity(quantity);
+                product.setEstimatedTime(estimated_time);
+                product.setLocation(location);
+            }
+        }
+    }
+
 }

@@ -54,6 +54,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.UserViewActivity" />
+        <activity android:name=".ui.activity.ManageProductActivity" />
+        <activity android:name=".ui.activity.ManageProductViewActivity" />
         <activity android:name=".ui.activity.MapActivity" />
     </application>
 
