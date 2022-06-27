@@ -42,4 +42,6 @@
     <string name="invalid_date">Invalid Date</string>
     <string name="invalid_date_in_future">Date is in future</string>
     <string name="invalid_date_end_before_start">End Date is in before Start Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>

@@ -128,6 +128,12 @@ public class MainActivityTest{
 
         Espresso.onView(ViewMatchers.withText("Anmelden"))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        Espresso.onView(ViewMatchers.withText("Deutsch"))
+                .perform(ViewActions.click());
+
+        Espresso.onView(ViewMatchers.withText("Englisch"))
+                .perform(ViewActions.click());
     }
 
     @Test
