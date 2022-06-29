@@ -20,6 +20,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     private ProductViewModel productViewModel;
     private int orderId;
+    private boolean checkboxVisible = true;
 
     private static class ViewHolder {
         TextView name;
@@ -34,6 +35,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         this.productViewModel = productViewModel;
         this.orderId = orderId;
     }
+
+    public ProductAdapter(@NonNull Context context, ProductViewModel productViewModel, int orderId,
+                          boolean checkboxVisible) {
+        super(context, R.layout.productlist_item);
+        this.productViewModel = productViewModel;
+        this.orderId = orderId;
+        this.checkboxVisible = checkboxVisible;
+    }
+
     public ProductAdapter(@NonNull Context context)
     {
         super(context, R.layout.productlist_item);
@@ -48,6 +58,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             TextView textViewQuantity = convertView.findViewById(R.id.textViewProductQuantity);
             TextView textViewLocation = convertView.findViewById(R.id.textViewProductLocation);
             CheckBox checkbox = convertView.findViewById(R.id.checkBox);
+
+            checkbox.setVisibility(checkboxVisible ? View.VISIBLE : View.INVISIBLE);
 
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.name = textViewName;

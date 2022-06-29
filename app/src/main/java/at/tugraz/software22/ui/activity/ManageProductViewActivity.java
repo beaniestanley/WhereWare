@@ -44,6 +44,7 @@ public class ManageProductViewActivity extends AppCompatActivity {
             input_location.setText(currentProduct.getLocation());
             input_quantity.setText(Integer.toString(currentProduct.getProductQuantity()));
         }
+
         deleteButton.setOnClickListener(event -> {
             Integer id = currentProduct.getId();
             Intent output = new Intent();
@@ -51,6 +52,7 @@ public class ManageProductViewActivity extends AppCompatActivity {
             setResult(RESULT_OK, output);
             finish();
         });
+
         createButton.setOnClickListener(event -> {
             boolean shouldReturn = false;
             String text_product_name = input_product_name.getText().toString();
@@ -74,14 +76,24 @@ public class ManageProductViewActivity extends AppCompatActivity {
                 input_quantity.setError("Entered value should not empty");
             }
 
+            int quantity, estimatedTime;
+            try {
+                quantity = Integer.parseInt(text_quantity);
+                estimatedTime = Integer.parseInt(text_estimated_time);
+            } catch(NumberFormatException ex)
+            {
+                return;
+            }
+
             if (shouldReturn){
                 return;
             }
+
             Intent output = new Intent();
             output.putExtra(INTENT_RESULT_PRODUCT_NAME, text_product_name);
-            output.putExtra(INTENT_RESULT_ESTIMATED_TIME, text_estimated_time);
+            output.putExtra(INTENT_RESULT_ESTIMATED_TIME, estimatedTime);
             output.putExtra(INTENT_RESULT_LOCATION, text_location);
-            output.putExtra(INTENT_RESULT_QUANTITY, text_quantity);
+            output.putExtra(INTENT_RESULT_QUANTITY, quantity);
             setResult(RESULT_OK, output);
             if (currentProduct != null){
                 output.putExtra(INTENT_RESULT_PRODUCT_ID, currentProduct.getId());
