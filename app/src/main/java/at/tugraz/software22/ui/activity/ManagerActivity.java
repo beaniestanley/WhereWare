@@ -66,6 +66,11 @@ public class ManagerActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        buttonManageProducts.setOnClickListener(l -> {
+            Intent intent = new Intent(getApplicationContext(), ManageProductActivity.class);
+            startActivity(intent);
+        });
+
         buttonLogout.setOnClickListener(l -> {
             finish();
         });

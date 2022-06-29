@@ -61,7 +61,7 @@ public class ManageProductActivity extends AppCompatActivity {
 
     private void setupListView() {
         productListView = findViewById(R.id.allProducts);
-        adapter = new ProductAdapter(this);
+        adapter = new ProductAdapter(this, productViewModel, 0, false);
         productListView.setAdapter(adapter);
     }
 
